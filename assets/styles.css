@@ -8,29 +8,29 @@
 
 /* --- Imprima Regular --- */
 @font-face {
-    font-family: "Imprima"; /* Name you'll use in CSS */
-    src: url("../assets/fonts/Imprima-Regular.ttf") format("truetype");
-    font-weight: 400; /* Imprima only has Regular weight */
-    font-style: normal;
-    font-display: swap; /* Highly Recommended! */
+	font-family: "Imprima"; /* Name you'll use in CSS */
+	src: url("../assets/fonts/Imprima-Regular.ttf") format("truetype");
+	font-weight: 400; /* Imprima only has Regular weight */
+	font-style: normal;
+	font-display: swap; /* Highly Recommended! */
 }
 
 /* --- Klee One Regular --- */
 @font-face {
-    font-family: "Klee One";
-    src: url("../assets/fonts/KleeOne-Regular.ttf") format("truetype");
-    font-weight: 400; /* 400 corresponds to Regular */
-    font-style: normal;
-    font-display: swap;
+	font-family: "Klee One";
+	src: url("../assets/fonts/KleeOne-Regular.ttf") format("truetype");
+	font-weight: 400; /* 400 corresponds to Regular */
+	font-style: normal;
+	font-display: swap;
 }
 
 /* --- Klee One SemiBold --- */
 @font-face {
-    font-family: "Klee One";
-    src: url("/assets/fonts/KleeOne-SemiBold.ttf") format("truetype");
-    font-weight: 600; /* 600 corresponds to SemiBold */
-    font-style: normal;
-    font-display: swap;
+	font-family: "Klee One";
+	src: url("/assets/fonts/KleeOne-SemiBold.ttf") format("truetype");
+	font-weight: 600; /* 600 corresponds to SemiBold */
+	font-style: normal;
+	font-display: swap;
 }
 /* ======================================== */
 /* CSS Variables (Theming)                  */
@@ -132,7 +132,7 @@ html.dark-mode {
 /* Base Styles                              */
 /* ======================================== */
 body {
-	font-family: "Inter", sans-serif;
+	font-family: "Klee One", sans-serif; /* Use Klee One, fallback to standard sans-serif */
 	line-height: 1.6;
 	padding: 20px;
 	margin: 0;
@@ -149,6 +149,7 @@ body {
 	border-radius: 8px;
 	box-shadow: 0 2px 10px var(--container-shadow);
 	transition: var(--theme-transition);
+	font-family: "Klee One", sans-serif; /* Use Klee One, fallback to standard sans-serif */
 }
 
 h1,
@@ -156,6 +157,7 @@ h2 {
 	text-align: center;
 	color: var(--text-color);
 	transition: var(--theme-transition);
+	font-family: "Imprima", sans-serif; /* Use Imprima, fallback to standard sans-serif */
 }
 
 label {
@@ -164,6 +166,7 @@ label {
 	transition: var(--theme-transition);
 	margin-bottom: 5px;
 	display: block;
+	font-family: "Imprima", sans-serif; /* Use Imprima, fallback to standard sans-serif */
 }
 
 input[type="text"],
@@ -201,6 +204,7 @@ textarea {
 	font-size: 1em;
 	transition: background-color 0.2s ease, color 0.2s ease,
 		transform 0.1s ease-out;
+	font-family: "Klee One", sans-serif; /* Use Klee One, fallback to standard sans-serif */
 }
 
 .button-group button:hover:not(:disabled) {
@@ -324,7 +328,7 @@ textarea {
 }
 
 .flashcard-content {
-	font-family: "Inter", sans-serif; /* Changed from Klee One */
+	font-family: "Klee One", sans-serif; /* Use Klee One, fallback to standard sans-serif */
 	font-size: 1.6em; /* Adjusted font size */
 	color: var(--flashcard-text);
 	word-break: break-word;
@@ -335,7 +339,7 @@ textarea {
 }
 
 .flashcard-translation {
-	font-family: "Inter", sans-serif; /* Changed from Klee One */
+	font-family: "Klee One", sans-serif; /* Use Klee One, fallback to standard sans-serif */
 	font-size: 1.1em; /* Adjusted font size */
 	margin-top: 10px;
 	color: #666;
@@ -379,7 +383,7 @@ html.dark-mode .flashcard.match-paired {
 #word-list-table {
 	width: 100%;
 	border-collapse: collapse;
-	font-size: 1.0em;
+	font-size: 1em;
 	table-layout: fixed; /* Helps with column sizing */
 }
 
@@ -599,7 +603,6 @@ html.dark-mode #theme-toggle::before {
 	.flashcard {
 		padding: 10px; /* Even less padding for tiny cards */
 		min-height: 80px; /* Allow even smaller min-height */
-		
 	}
 	#flashcard-grid-mode2,
 	#flashcard-grid-mode3 {
