@@ -1,20 +1,23 @@
-![Pronunciation Checker](https://github.com/tgmgroup/Pronunciation-Checker/blob/main/assets/images/pronunciation-checker-xl.png) 
+![Pronunciation Checker](https://github.com/tgmgroup/Flashcard-and-Pronunciation-App/blob/main/assets/images/pronunciation-checker-xl.png) 
 
-# Pronunciation Checker
+# Flashcard and Pronunciation App
 
-[![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/tgmgroup/Pronunciation-Checker?include_prereleases)](https://img.shields.io/github/v/release/tgmgroup/Pronunciation-Checker?include_prereleases)
-[![GitHub last commit](https://img.shields.io/github/last-commit/tgmgroup/Pronunciation-Checker)](https://img.shields.io/github/last-commit/tgmgroup/Pronunciation-Checker)
-[![GitHub issues](https://img.shields.io/github/issues-raw/tgmgroup/Pronunciation-Checker)](https://img.shields.io/github/issues-raw/tgmgroup/Pronunciation-Checker)
-[![GitHub pull requests](https://img.shields.io/github/issues-pr/tgmgroup/Pronunciation-Checker)](https://img.shields.io/github/issues-pr/tgmgroup/Pronunciation-Checker)
-[![GitHub](https://img.shields.io/github/license/tgmgroup/Pronunciation-Checker)](https://img.shields.io/github/license/tgmgroup/Pronunciation-Checker)
+[![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/tgmgroup/Flashcard-and-Pronunciation-App?include_prereleases)](https://img.shields.io/github/v/release/tgmgroup/Flashcard-and-Pronunciation-App?include_prereleases)
+[![GitHub last commit](https://img.shields.io/github/last-commit/tgmgroup/Flashcard-and-Pronunciation-App)](https://img.shields.io/github/last-commit/tgmgroup/Flashcard-and-Pronunciation-App)
+[![GitHub issues](https://img.shields.io/github/issues-raw/tgmgroup/Flashcard-and-Pronunciation-App)](https://img.shields.io/github/issues-raw/tgmgroup/Flashcard-and-Pronunciation-App)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/tgmgroup/Flashcard-and-Pronunciation-App)](https://img.shields.io/github/issues-pr/tgmgroup/Flashcard-and-Pronunciation-App)
+[![GitHub](https://img.shields.io/github/license/tgmgroup/Flashcard-and-Pronunciation-App)](https://img.shields.io/github/license/tgmgroup/Flashcard-and-Pronunciation-App)
 
-A TTS and STT tool for students to check their reading of specified text (pronunciation). 
+A tool for Japanese students to listen to, review, and test their knowledge of English words.
 
-This is a simple in-browser tool that can help students check their pronunciation accuracy. It's built to emulate the basic features of Microsoft's excellent [Reading Coach](https://coach.microsoft.com "Reading Coach") (but without the time and money and required login that they have). The *New Horizon* textbooks in Japan also have a similar tool, for example, this [pronunciation checker](https://sw101.tsho.jp/nh-pronunciation-/index.html?g=1&ks=41).
+There are three modes to this tool. 
+- Mode 1: Full Word List
+- Mode 2: Flashcard Matching (of English and Japanese meanings)
+- Mode 3: Speak & Check (Speak the correct English word for the Japanese flashcard)
 
-To use this tool, open the site and input your desired text. To pre-seed the text (especially for teachers wanting students to practice specific phrases), you can use a ?query: [https://speech.isesaki.in/index.html?text=Let's practice this text.](https://speech.isesaki.in/index.html?text=Let%27s%20practice%20this%20text.) 
+This tool automatically loads a preseeded list and associated audio files (made with Microsoft's Ava voice and NaturalReaders.com).
 
-This tool seems to work well in Chrome-based browsers. **Microsoft Edge** users will have access to the excellent AI-powered Native voices, of which **Andrew** and **Ava** are really nice voices to use.
+If you fork this project, change the URL for this list (and the associated voice file URLs in that list) to your own file.
 
 # Table of Contents
 - [Pronunciation Checker](#pronunciation-checker)
