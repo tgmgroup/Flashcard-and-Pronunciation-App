@@ -694,15 +694,21 @@ function calculateAccuracy(originalText, recognizedText) {
  * Sets up or reconfigures SpeechRecognition specifically for Mode 3.
  */
 function setupSpeechRecognitionForMode3() {
-	if (!("webkitSpeechRecognition" in window)) {
+	// Check for SpeechRecognition API support
+	const SpeechRecognition =
+		window.SpeechRecognition || window.webkitSpeechRecognition;
+
+	if (!SpeechRecognition) {
 		speechFeedback.textContent =
-			"Speech recognition is not supported in your browser. Please use Chrome.";
+			"Speech recognition is not supported in your browser. Please use a browser that supports it (e.g., Chrome, Firefox).";
 		startMode3Btn.disabled = true;
 		return;
+	} else {
+		// If supported, ensure button is enabled in case it was disabled by a previous error
+		startMode3Btn.disabled = false;
 	}
 
 	if (!recognition) {
-		const SpeechRecognition = window.webkitSpeechRecognition;
 		recognition = new SpeechRecognition();
 	}
 
@@ -789,37 +795,36 @@ function setupSpeechRecognitionForMode3() {
 			activeCard.classList.remove("active-for-speech");
 		}
 
-		let errorMessage = `Speech recognition error: ${event.error}`;
+		let errorMessage = `Speech recognition error: ${event.error}.`;
 		if (event.error === "no-speech") {
 			errorMessage = "No speech detected. Please try again.";
 		} else if (event.error === "not-allowed") {
 			errorMessage =
-				"Microphone access denied. Please allow in browser settings.";
-			showToast(
-				"Microphone access denied. Please enable it in your browser settings.",
-				"error",
-				5000
-			);
+				"Microphone access denied. Please allow in browser settings and restart the round.";
 			startMode3Btn.disabled = true; // Disable if permission denied
 		} else {
-			errorMessage = `Error: ${event.error}`;
+			errorMessage = `Error: ${event.error}.`;
 		}
 		speechFeedback.textContent = errorMessage;
 		speechFeedback.classList.remove("hidden");
 		console.error("Speech recognition error:", event.error);
 
 		// If an error occurs, try to advance to the next card after a delay
-		setTimeout(loadNextSpeechFlashcard, 2000);
+		// Only advance if it's not a persistent permission error
+		if (event.error !== "not-allowed") {
+			setTimeout(loadNextSpeechFlashcard, 2000);
+		}
 	};
 
 	recognition.onend = () => {
 		isRecording = false; // Set to false on end
-		// If not all cards are cleared, show start button to continue
-		if (correctSpeechCount < NUM_FLASHCARDS) {
+		// If not all cards are cleared and not a permission error, show start button to continue
+		const activeCard = document.querySelector(".flashcard.active-for-speech");
+		if (correctSpeechCount < NUM_FLASHCARDS && !startMode3Btn.disabled) {
+			// Check if not disabled by 'not-allowed'
 			startMode3Btn.classList.remove("hidden");
 			stopSpeechBtn.classList.add("hidden");
 		}
-		const activeCard = document.querySelector(".flashcard.active-for-speech");
 		if (activeCard) {
 			activeCard.classList.remove("active-for-speech");
 		}
@@ -832,7 +837,7 @@ function setupSpeechRecognitionForMode3() {
 function startSpeechRecognitionMode3() {
 	if (!recognition) {
 		setupSpeechRecognitionForMode3();
-		if (!recognition) return; // If setup failed, exit
+		if (!recognition || startMode3Btn.disabled) return; // If setup failed or disabled, exit
 	}
 	if (!isRecording) {
 		recognition.start();
