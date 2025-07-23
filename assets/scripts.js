@@ -956,7 +956,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	} else {
 		// Default placeholder for a word list
 		wordFileUrlInput.value =
-			"assets/words.csv";
+			"https://flashcards.isesaki.in/assets/list.csv";
 	}
 
 	// Load words automatically if a URL is present
