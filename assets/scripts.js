@@ -956,7 +956,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	} else {
 		// Default placeholder for a word list
 		wordFileUrlInput.value =
-			"https://flashcards.isesaki.in/assets/list.csv";
+			"https://raw.githubusercontent.com/google/gemini-web-app-starter/main/words.csv";
 	}
 
 	// Load words automatically if a URL is present
