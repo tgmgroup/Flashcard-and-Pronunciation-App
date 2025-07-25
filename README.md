@@ -1,4 +1,4 @@
-![Pronunciation Checker](https://github.com/tgmgroup/Flashcard-and-Pronunciation-App/blob/main/assets/images/pronunciation-checker-xl.png) 
+![Flashcard and Pronunciation App](https://github.com/tgmgroup/Flashcard-and-Pronunciation-App/blob/main/assets/images/start.png) 
 
 # Flashcard and Pronunciation App
 
@@ -15,12 +15,14 @@ There are three modes to this tool.
 - Mode 2: Flashcard Matching (of English and Japanese meanings)
 - Mode 3: Speak & Check (Speak the correct English word for the Japanese flashcard)
 
-This tool automatically loads a preseeded list and associated audio files (made with Microsoft's Ava voice and NaturalReaders.com).
+This tool automatically loads a pre-seeded list and associated audio files (made with Microsoft's Ava voice and [NaturalReaders.com](https://www.naturalreaders.com/online/)). 
 
-If you fork this project, change the URL for this list (and the associated voice file URLs in that list) to your own file.
+If you fork this project, change the URL for the CSV list (and the associated voice file URLs in that list) to your own files and file locations. If you don't have a CSV list somewhere online, you can manually input those values, but they won't appear for other users.
+
+The app saves already studied and mistaken words in localStorage so users can avoid repeating known words.
 
 # Table of Contents
-- [Pronunciation Checker](#pronunciation-checker)
+- [Flashcard and Pronunciation App](#flaschard-and-pronunciation-app)
 - [Quick Start](#quick-start)
 - [Contribute](#contribute)
 - [License](#license)
@@ -30,13 +32,7 @@ If you fork this project, change the URL for this list (and the associated voice
 # Quick Start
 [(Back to top)](#table-of-contents)
 
-Access the Version 1 demo here: [Pronunciation Checker](https://tgmgroup.github.io/Pronunciation-Checker/)
-We're working on a Version 2 with a backend for Azure TTS and Google Translate.
-
-Version 2:
-Commands to build the project:
-npm init -y
-npm install express axios dotenv @google-cloud/translate
+Access the Version 1 demo here: [Pronunciation Checker](https://tgmgroup.github.io/Flashcard-and-Pronunciation-App/)
 
 # Contribute
 [(Back to top)](#table-of-contents)
@@ -51,9 +47,9 @@ Distributed under the [MIT license](./LICENSE). See [MIT License](https://openso
 
 # Credits
 [(Back to top)](#table-of-contents)
-This tool was built with the help of Gemini. Image by [Mohamed Hassan](https://unsplash.com/illustrations/a-person-is-recording-with-a-microphone-and-headphones-Oh3p6Wu3OOE "Mohamed Hassan on Unsplash")
+This tool was built with the help of Gemini, Microsoft's Azure TTS voices, and NaturalReader's AI TTS tool. 
 
 # Contact
 [(Back to top)](#table-of-contents)
 
-Project Link: [https://github.com/tgmgroup/Pronunciation-Checker](https://github.com/tgmgroup/Pronunciation-Checker)
+Project Link: [https://github.com/tgmgroup/Flashcard-and-Pronunciation-App](https://github.com/tgmgroup/Flashcard-and-Pronunciation-App)
