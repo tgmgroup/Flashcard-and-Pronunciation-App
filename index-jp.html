@@ -10,101 +10,20 @@
 	</head>
 	<body>
 		<div class="container">
-			<h1>英単語を復習しましょう！</h1>
+			<h1>英語練習をしよう!</h1>
 			<br /><br /><br />
 
 			<button id="theme-toggle" aria-label="Toggle dark mode"></button>
 
-			<div id="config-section">
-				<h2>単語リのコンフィグレーション</h2>
-				<label for="wordFileUrl"
-					>リストのURL (CSV: number,English,Japanese,voice_url):</label
-				>
-				<input
-					type="text"
-					id="wordFileUrl"
-					placeholder="e.g., https://example.com/words.csv"
-					value="https://flashcards.isesaki.in/assets/list.csv"
-				/>
-				<button id="loadWordsBtn" class="button-group">Load Words</button>
-				<p class="status-message" id="loadStatus"></p>
-			</div>
+		
 
 			<div class="button-group" id="mode-selection">
-				<button id="mode1Btn" class="active">Mode 1: 単語リスト</button>
-				<button id="mode2Btn">Mode 2: フラッシュカードマッチング</button>
-				<button id="mode3Btn">Mode 3: 発音と意味のチェック</button>
+				<button id="mode1Btn" onclick="window.location.href='vocabulary/index.html';" class="active">Part 1: 単語の復讐</button>
+				<button id="mode2Btn" onclick="window.location.href='past-tense/index.html';">Part 2: 原形・過去形</button>
+				
 			</div>
 		</div>
 
-		<!-- The Modal Overlay -->
-		<div id="appModal" class="modal hidden">
-			<div class="modal-content">
-				<span class="modal-close" id="modalCloseBtn">&times;</span>
-				<div id="modalContentArea">
-					<!-- Mode content will be dynamically moved here -->
-				</div>
-			</div>
-		</div>
-
-		<!-- Original mode sections are now hidden by default and moved into the modal -->
-		<div id="mode1" class="mode-section hidden">
-			<h2>全ての単語リスト</h2>
-			<div id="word-list-container">
-				<table id="word-list-table">
-					<thead>
-						<tr>
-							<th>#</th>
-							<th>英語</th>
-							<th>意味</th>
-							<th>聞く</th>
-							<th>回数/難しさ</th>
-						</tr>
-					</thead>
-					<tbody>
-						<!-- Word list will be populated here by JavaScript -->
-					</tbody>
-				</table>
-			</div>
-		</div>
-
-		<div id="mode2" class="mode-section hidden">
-			<h2>フラッシュカードマッチング</h2>
-			<div id="flashcard-grid-mode2" class="flashcard-grid">
-				<!-- Flashcards will be populated here by JavaScript -->
-			</div>
-			<div id="progress-container-mode2" class="hidden">
-				<span id="progress-text-mode2">0/10 マッチ</span>
-				<div id="progress-bar-container-mode2">
-					<div id="progress-bar-fill-mode2"></div>
-				</div>
-			</div>
-			<div class="button-group">
-				<button id="startMode2Btn">New Game</button>
-			</div>
-		</div>
-
-		<div id="mode3" class="mode-section hidden">
-			<h2>発音と意味のチェック</h2>
-			<div id="flashcard-grid-mode3" class="flashcard-grid">
-				<!-- Flashcards will be populated here by JavaScript -->
-			</div>
-			<p id="currentSpeechWordDisplay" class="status-message hidden"></p>
-			<p id="speechFeedback" class="status-message hidden"></p>
-			<div id="progress-container-mode3" class="hidden">
-				<span id="progress-text-mode3">0/10 Correct</span>
-				<div id="progress-bar-container-mode3">
-					<div id="progress-bar-fill-mode3"></div>
-				</div>
-			</div>
-			<div class="button-group">
-				<button id="startMode3Btn">New Game</button>
-				<button id="stopSpeechBtn" class="hidden">録音をやめる</button>
-			</div>
-		</div>
-
-		<audio id="audioPlayer"></audio>
-		<div id="toast-container"></div>
 
 		<script src="assets/scripts.js"></script>
 	</body>
