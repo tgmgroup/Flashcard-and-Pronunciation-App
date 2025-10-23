@@ -15,7 +15,7 @@ There are three modes to this tool.
 - Mode 2: Flashcard Matching (of English and Japanese meanings)
 - Mode 3: Speak & Check (Speak the correct English word for the Japanese flashcard)
 
-This tool automatically loads a pre-seeded list and associated audio files (made with Microsoft's Ava voice and [NaturalReaders.com](https://www.naturalreaders.com/online/)). 
+This tool automatically loads a pre-seeded list and associated audio files (made with Microsoft's Ava voice and [NaturalReaders.com](https://www.naturalreaders.com/online/)). http://127.0.0.1:5500/?list=https://flashcards.isesaki.in/assets/list.csv https://flashcards.isesaki.in/assets/list.csv
 
 If you fork this project, change the URL for the CSV list (and the associated voice file URLs in that list) to your own files and file locations. If you don't have a CSV list somewhere online, you can manually input those values, but they won't appear for other users.
 

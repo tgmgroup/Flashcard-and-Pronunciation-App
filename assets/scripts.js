@@ -1,5 +1,4 @@
 // script.js content starts here
-
 // ========================================
 // DOM Elements
 // ========================================
@@ -33,7 +32,7 @@ const wordListTableBody = document.querySelector("#word-list-table tbody");
 const flashcardGridMode2 = document.getElementById("flashcard-grid-mode2");
 const startMode2Btn = document.getElementById("startMode2Btn");
 const progressContainerMode2 = document.getElementById(
-	"progress-container-mode2"
+  "progress-container-mode2"
 );
 const progressTextMode2 = document.getElementById("progress-text-mode2");
 const progressBarFillMode2 = document.getElementById("progress-bar-fill-mode2");
@@ -43,15 +42,15 @@ const flashcardGridMode3 = document.getElementById("flashcard-grid-mode3");
 const startMode3Btn = document.getElementById("startMode3Btn");
 const stopSpeechBtn = document.getElementById("stopSpeechBtn");
 const currentSpeechWordDisplay = document.getElementById(
-	"currentSpeechWordDisplay"
+  "currentSpeechWordDisplay"
 );
 const speechFeedback = document.getElementById("speechFeedback");
 const progressContainerMode3 = document.getElementById(
-	"progress-container-mode3"
+  "progress-container-mode3"
 );
 const progressTextMode3 = document.getElementById("progress-text-mode3");
 const progressBarFillMode3 = document.getElementById(
-	"progress-bar-fill-mode3"
+  "progress-bar-fill-mode3"
 ); /* FIX: Corrected ID */
 
 // ========================================
@@ -62,7 +61,6 @@ let wordUsage = {}; // Stores usage and difficulty data from localStorage
 const NUM_FLASHCARDS = 10; // Number of flashcards per round
 const FLASHCARD_MATCH_DELAY_MS = 1000; // How long matched cards stay visible before disappearing
 const SPEECH_RECOGNITION_THRESHOLD = 0.7; // Accuracy threshold for speech matching (0.0 to 1.0)
-
 let currentMode = null; // Tracks the active mode, null when no modal is open
 
 // Mode 2 specific
@@ -80,7 +78,6 @@ let currentSpeechCardIndex = -1; // Index of the current word in Mode 3 deck
 // ========================================
 // Utility Functions
 // ========================================
-
 /**
  * Displays a toast notification.
  * @param {string} message - The message to display.
@@ -88,21 +85,23 @@ let currentSpeechCardIndex = -1; // Index of the current word in Mode 3 deck
  * @param {number} duration - How long the toast should be visible in ms.
  */
 function showToast(message, type = "info", duration = 3000) {
-	const toast = document.createElement("div");
-	toast.classList.add("toast", type);
-	toast.textContent = message;
-	toastContainer.appendChild(toast);
+  const toast = document.createElement("div");
+  toast.classList.add("toast", type);
+  toast.textContent = message;
+  toastContainer.appendChild(toast);
 
-	// Trigger reflow to enable transition
-	void toast.offsetWidth;
-	toast.classList.add("show");
+  // Trigger reflow to enable transition
+  void toast.offsetWidth;
+  toast.classList.add("show");
 
-	setTimeout(() => {
-		toast.classList.remove("show");
-		toast.addEventListener("transitionend", () => toast.remove(), {
-			once: true,
-		});
-	}, duration);
+  setTimeout(() => {
+    toast.classList.remove("show");
+    toast.addEventListener(
+      "transitionend",
+      () => toast.remove(),
+      { once: true }
+    );
+  }, duration);
 }
 
 /**
@@ -110,41 +109,41 @@ function showToast(message, type = "info", duration = 3000) {
  * @param {string} url - The URL of the voice file.
  */
 function playPronunciation(url) {
-	if (url) {
-		audioPlayer.src = url;
-		audioPlayer.play().catch((e) => console.error("Error playing audio:", e));
-	} else {
-		showToast("No voice file available for this word.", "info", 2000);
-	}
+  if (url) {
+    audioPlayer.src = url;
+    audioPlayer.play().catch((e) => console.error("Error playing audio:", e));
+  } else {
+    showToast("No voice file available for this word.", "info", 2000);
+  }
 }
 
 /**
  * Saves word usage data to localStorage.
  */
 function saveWordUsage() {
-	localStorage.setItem("wordUsage", JSON.stringify(wordUsage));
+  localStorage.setItem("wordUsage", JSON.stringify(wordUsage));
 }
 
 /**
  * Initializes word usage data for newly loaded words.
  */
 function initializeWordUsage() {
-	allWords.forEach((word) => {
-		if (!wordUsage[word.number]) {
-			wordUsage[word.number] = { usedCount: 0, difficulty: 0 };
-		}
-	});
-	saveWordUsage(); // Save any new initializations
+  allWords.forEach((word) => {
+    if (!wordUsage[word.number]) {
+      wordUsage[word.number] = { usedCount: 0, difficulty: 0 };
+    }
+  });
+  saveWordUsage(); // Save any new initializations
 }
 
 /**
  * Loads word usage data from localStorage.
  */
 function loadWordUsage() {
-	const savedUsage = localStorage.getItem("wordUsage");
-	if (savedUsage) {
-		wordUsage = JSON.parse(savedUsage);
-	}
+  const savedUsage = localStorage.getItem("wordUsage");
+  if (savedUsage) {
+    wordUsage = JSON.parse(savedUsage);
+  }
 }
 
 /**
@@ -156,15 +155,15 @@ function loadWordUsage() {
  * @param {string} unit - Unit to display (e.g., "Matched", "Correct").
  */
 function updateProgressBar(
-	progressBarFillEl,
-	progressTextEl,
-	current,
-	total,
-	unit
+  progressBarFillEl,
+  progressTextEl,
+  current,
+  total,
+  unit
 ) {
-	const percentage = total === 0 ? 0 : (current / total) * 100;
-	progressBarFillEl.style.width = `${percentage}%`;
-	progressTextEl.textContent = `${current}/${total} ${unit}`;
+  const percentage = total === 0 ? 0 : (current / total) * 100;
+  progressBarFillEl.style.width = `${percentage}%`;
+  progressTextEl.textContent = `${current}/${total} ${unit}`;
 }
 
 /**
@@ -175,174 +174,194 @@ function updateProgressBar(
  * @returns {Array<Object>} Selected words.
  */
 function selectWeightedRandomWords(words, count) {
-	if (words.length === 0) return [];
-	if (words.length <= count) return [...words]; // If fewer words than requested, return all unique
+  if (words.length === 0) return [];
+  // Ensure word.isUsedInCurrentRound exists for all words
+  words.forEach(word => {
+    if (word.isUsedInCurrentRound === undefined) {
+      word.isUsedInCurrentRound = false;
+    }
+  });
 
-	const availableWords = words.filter((word) => {
-		const usageData = wordUsage[word.number];
-		return usageData && !word.isUsedInCurrentRound; // Ensure not already used in this specific round
-	});
+  const availableWords = words.filter((word) => !word.isUsedInCurrentRound);
 
-	if (availableWords.length < count) {
-		// If not enough unique words left, reset usage for all words to allow selection
-		// This prevents the game from getting stuck if all words are "used"
-		allWords.forEach((word) => (word.isUsedInCurrentRound = false));
-		return selectWeightedRandomWords(words, count); // Retry with reset
-	}
+  if (availableWords.length < count) {
+    // If not enough unique words left, reset usage for all words to allow selection
+    // This prevents the game from getting stuck if all words are "used"
+    allWords.forEach((word) => (word.isUsedInCurrentRound = false));
+    // Recursive call to retry selection after reset
+    return selectWeightedRandomWords(words, count);
+  }
 
-	// Calculate weights
-	const weightedWords = availableWords.map((word) => {
-		const usageData = wordUsage[word.number] || { usedCount: 0, difficulty: 0 };
-		let weight = 1.0;
+  // Calculate weights
+  const weightedWords = availableWords.map((word) => {
+    const usageData = wordUsage[word.number] || { usedCount: 0, difficulty: 0 };
+    let weight = 1.0;
 
-		// Decrease weight for higher usage (more used = lower chance)
-		weight /= usageData.usedCount + 1; // Add 1 to avoid division by zero
+    // Decrease weight for higher usage (more used = lower chance)
+    weight /= usageData.usedCount + 1; // Add 1 to avoid division by zero
 
-		// Increase weight for higher difficulty
-		weight *= usageData.difficulty + 1;
+    // Increase weight for higher difficulty
+    weight *= usageData.difficulty + 1;
 
-		return { word, weight: Math.max(0.1, weight) }; // Ensure minimum weight
-	});
+    return { word, weight: Math.max(0.1, weight) }; // Ensure minimum weight
+  });
 
-	// Create a cumulative weight array for efficient selection
-	let cumulativeWeights = [];
-	let totalWeight = 0;
-	for (const item of weightedWords) {
-		totalWeight += item.weight;
-		cumulativeWeights.push({ word: item.word, cumulativeWeight: totalWeight });
-	}
+  // Create a cumulative weight array for efficient selection
+  let cumulativeWeights = [];
+  let totalWeight = 0;
+  for (const item of weightedWords) {
+    totalWeight += item.weight;
+    cumulativeWeights.push({ word: item.word, cumulativeWeight: totalWeight });
+  }
 
-	const selected = new Set();
-	while (selected.size < count && cumulativeWeights.length > 0) {
-		const randomValue = Math.random() * totalWeight;
-		for (let i = 0; i < cumulativeWeights.length; i++) {
-			if (randomValue < cumulativeWeights[i].cumulativeWeight) {
-				const wordToAdd = cumulativeWeights[i].word;
-				if (!selected.has(wordToAdd)) {
-					selected.add(wordToAdd);
-					// Mark as used for this round to prevent immediate re-selection
-					wordToAdd.isUsedInCurrentRound = true;
-					// Rebuild cumulative weights for remaining words if you want to
-					// ensure unique selection within this call. For simplicity,
-					// we'll just rely on the Set to prevent duplicates.
-				}
-				break;
-			}
-		}
-	}
-	return Array.from(selected);
+  const selected = new Set();
+  while (selected.size < count && cumulativeWeights.length > 0) {
+    const randomValue = Math.random() * totalWeight;
+    for (let i = 0; i < cumulativeWeights.length; i++) {
+      if (randomValue < cumulativeWeights[i].cumulativeWeight) {
+        const wordToAdd = cumulativeWeights[i].word;
+        if (!selected.has(wordToAdd)) {
+          selected.add(wordToAdd);
+          // Mark as used for this round to prevent immediate re-selection
+          wordToAdd.isUsedInCurrentRound = true;
+          // Rebuild cumulative weights for remaining words if you want to
+          // ensure unique selection within this call. For simplicity,
+          // we'll just rely on the Set to prevent duplicates.
+        }
+        break;
+      }
+    }
+  }
+  return Array.from(selected);
 }
 
 // ========================================
 // Theme Toggle
 // ========================================
 themeToggle.addEventListener("click", () => {
-	document.documentElement.classList.toggle("dark-mode");
-	const isDarkMode = document.documentElement.classList.contains("dark-mode");
-	localStorage.setItem("darkMode", isDarkMode);
+  document.documentElement.classList.toggle("dark-mode");
+  const isDarkMode = document.documentElement.classList.contains("dark-mode");
+  localStorage.setItem("darkMode", isDarkMode);
 });
 
 // Apply theme on load
 function applyTheme() {
-	const savedTheme = localStorage.getItem("darkMode");
-	if (savedTheme === "true") {
-		document.documentElement.classList.add("dark-mode");
-	} else {
-		document.documentElement.classList.remove("dark-mode");
-	}
+  const savedTheme = localStorage.getItem("darkMode");
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  
+  // 1. Check for a saved manual preference first
+  if (savedTheme === "true") {
+    document.documentElement.classList.add("dark-mode");
+  } else if (savedTheme === "false") {
+    document.documentElement.classList.remove("dark-mode");
+  } 
+  // 2. If no manual preference is saved (null), use the system preference
+  else if (prefersDark) {
+    document.documentElement.classList.add("dark-mode");
+  } 
+  // 3. Otherwise, default to light mode
+  else {
+    document.documentElement.classList.remove("dark-mode");
+  }
 }
 
 // ========================================
 // Word Loading
 // ========================================
-
 /**
  * Loads the word list from the specified URL.
  */
 async function loadWords() {
-	const url = wordFileUrlInput.value.trim();
-	if (!url) {
-		showToast("Please enter a word file URL.", "error");
-		return;
-	}
+  const url = wordFileUrlInput.value.trim();
 
-	loadStatusElement.textContent = "Loading words...";
-	loadStatusElement.classList.remove("hidden");
-	loadWordsBtn.disabled = true;
+  if (!url) {
+    showToast("Please enter a word file URL.", "error");
+    return;
+  }
 
-	try {
-		const response = await fetch(url);
-		if (!response.ok) {
-			throw new Error(`HTTP error! status: ${response.status}`);
-		}
-		const text = await response.text();
-		// Expected format: number,English,Japanese,voice_url
-		allWords = text
-			.split("\n")
-			.filter((line) => line.trim() !== "")
-			.map((line) => {
-				const parts = line.split(",");
-				if (parts.length === 4) {
-					return {
-						number: parseInt(parts[0].trim()),
-						english: parts[1].trim(),
-						japanese: parts[2].trim(),
-						voiceUrl: parts[3].trim(),
-						isUsedInCurrentRound: false, // Helper for weighted selection
-					};
-				}
-				return null; // Ignore malformed lines
-			})
-			.filter((word) => word !== null);
+  loadStatusElement.textContent = "Loading words...";
+  loadStatusElement.classList.remove("hidden");
+  loadWordsBtn.disabled = true;
 
-		if (allWords.length === 0) {
-			showToast("No words found in the file or invalid format.", "error");
-			loadStatusElement.textContent = "Failed to load words: No words found.";
-			return;
-		}
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const text = await response.text();
 
-		initializeWordUsage(); // Initialize or update usage data for loaded words
-		showToast(`Successfully loaded ${allWords.length} words!`, "success");
-		loadStatusElement.textContent = `Loaded ${allWords.length} words.`;
-		configSection.classList.add("hidden"); // Hide the configuration section on successful load
-		// Removed: activateMode('mode1', mode1Btn); // No longer defaults to Mode 1
-	} catch (error) {
-		console.error("Error loading words:", error);
-		showToast(`Failed to load words: ${error.message}`, "error");
-		loadStatusElement.textContent = `Failed to load words: ${error.message}`;
-	} finally {
-		loadWordsBtn.disabled = false;
-	}
+    // Expected format: number,English,Japanese,voice_url
+    allWords = text
+      .split("\n")
+      .filter((line) => line.trim() !== "")
+      .map((line) => {
+        const parts = line.split(",");
+        if (parts.length === 4) {
+          return {
+            number: parseInt(parts[0].trim()),
+            english: parts[1].trim(),
+            japanese: parts[2].trim(),
+            voiceUrl: parts[3].trim(),
+            isUsedInCurrentRound: false, // Helper for weighted selection
+          };
+        }
+        return null; // Ignore malformed lines
+      })
+      .filter((word) => word !== null);
+
+    if (allWords.length === 0) {
+      showToast("No words found in the file or invalid format.", "error");
+      loadStatusElement.textContent = "Failed to load words: No words found.";
+      // Ensure the config section remains visible if no words are found
+      configSection.classList.remove("hidden"); 
+      return;
+    }
+
+    initializeWordUsage(); // Initialize or update usage data for loaded words
+    showToast(`Successfully loaded ${allWords.length} words!`, "success");
+    loadStatusElement.textContent = `Loaded ${allWords.length} words.`;
+    // Hide the configuration section on successful load
+    configSection.classList.add("hidden"); 
+  } catch (error) {
+    console.error("Error loading words:", error);
+    showToast(`Failed to load words: ${error.message}`, "error");
+    loadStatusElement.textContent = `Failed to load words: ${error.message}`;
+    // Ensure the config section is visible on failure for manual retry
+    configSection.classList.remove("hidden");
+  } finally {
+    loadWordsBtn.disabled = false;
+  }
 }
 
 // ========================================
 // Modal & Mode Switching
 // ========================================
-
 /**
  * Hides all mode sections by moving them back to their original hidden state.
  * Also stops any ongoing processes.
  */
 function hideAllModes() {
-	// Move current content back to its original hidden location
-	if (currentMode === "mode1") {
-		document.body.appendChild(mode1Section);
-	} else if (currentMode === "mode2") {
-		document.body.appendChild(mode2Section);
-	} else if (currentMode === "mode3") {
-		document.body.appendChild(mode3Section);
-	}
-	// Ensure all mode sections are hidden in their original positions
-	mode1Section.classList.add("hidden");
-	mode2Section.classList.add("hidden");
-	mode3Section.classList.add("hidden");
+  // Move current content back to its original hidden location
+  if (currentMode === "mode1") {
+    document.body.appendChild(mode1Section);
+  } else if (currentMode === "mode2") {
+    document.body.appendChild(mode2Section);
+  } else if (currentMode === "mode3") {
+    document.body.appendChild(mode3Section);
+  }
 
-	document.querySelectorAll("#mode-selection button").forEach((button) => {
-		button.classList.remove("active");
-	});
-	// Stop any ongoing speech or recognition when switching modes
-	if (audioPlayer) audioPlayer.pause();
-	stopSpeechRecognitionMode3(); // Ensure STT is stopped
+  // Ensure all mode sections are hidden in their original positions
+  mode1Section.classList.add("hidden");
+  mode2Section.classList.add("hidden");
+  mode3Section.classList.add("hidden");
+
+  document.querySelectorAll("#mode-selection button").forEach((button) => {
+    button.classList.remove("active");
+  });
+
+  // Stop any ongoing speech or recognition when switching modes
+  if (audioPlayer) audioPlayer.pause();
+  stopSpeechRecognitionMode3(); // Ensure STT is stopped
 }
 
 /**
@@ -350,38 +369,40 @@ function hideAllModes() {
  * @param {HTMLElement} modeElement - The HTML element of the mode section to display.
  */
 function showModeInModal(modeElement) {
-	modalContentArea.innerHTML = ""; // Clear previous modal content
-	modalContentArea.appendChild(modeElement); // Move the mode section into the modal
-	modeElement.classList.remove("hidden"); // Make it visible inside the modal
-	appModal.classList.remove("hidden"); // Show the modal itself
+  modalContentArea.innerHTML = ""; // Clear previous modal content
+  modalContentArea.appendChild(modeElement); // Move the mode section into the modal
+  modeElement.classList.remove("hidden"); // Make it visible inside the modal
+  appModal.classList.remove("hidden"); // Show the modal itself
 }
 
 /**
  * Hides the modal and performs cleanup for the currently active mode.
  */
 function hideModal() {
-	appModal.classList.add("hidden"); // Hide the modal overlay
-	// Perform cleanup based on the mode that was active
-	if (currentMode === "mode2") {
-		flashcardGridMode2.innerHTML = ""; // Clear flashcards
-		selectedCards = [];
-		matchedPairs = 0;
-		progressContainerMode2.classList.add("hidden");
-		startMode2Btn.classList.remove("hidden"); // Show start button for next time
-	} else if (currentMode === "mode3") {
-		flashcardGridMode3.innerHTML = ""; // Clear flashcards
-		stopSpeechRecognitionMode3(); // Ensure STT is stopped
-		correctSpeechCount = 0;
-		currentSpeechWord = null;
-		currentSpeechWordDisplay.classList.add("hidden");
-		speechFeedback.classList.add("hidden");
-		progressContainerMode3.classList.add("hidden");
-		startMode3Btn.classList.remove("hidden"); // Show start button for next time
-		stopSpeechBtn.classList.add("hidden"); // Hide stop button
-	}
-	// Move the content back to its original hidden place in the DOM
-	hideAllModes(); // This function now handles moving content back and hiding it
-	currentMode = null; // No mode is active in the modal
+  appModal.classList.add("hidden"); // Hide the modal overlay
+
+  // Perform cleanup based on the mode that was active
+  if (currentMode === "mode2") {
+    flashcardGridMode2.innerHTML = ""; // Clear flashcards
+    selectedCards = [];
+    matchedPairs = 0;
+    progressContainerMode2.classList.add("hidden");
+    startMode2Btn.classList.remove("hidden"); // Show start button for next time
+  } else if (currentMode === "mode3") {
+    flashcardGridMode3.innerHTML = ""; // Clear flashcards
+    stopSpeechRecognitionMode3(); // Ensure STT is stopped
+    correctSpeechCount = 0;
+    currentSpeechWord = null;
+    currentSpeechWordDisplay.classList.add("hidden");
+    speechFeedback.classList.add("hidden");
+    progressContainerMode3.classList.add("hidden");
+    startMode3Btn.classList.remove("hidden"); // Show start button for next time
+    stopSpeechBtn.classList.add("hidden"); // Hide stop button
+  }
+
+  // Move the content back to its original hidden place in the DOM
+  hideAllModes(); // This function now handles moving content back and hiding it
+  currentMode = null; // No mode is active in the modal
 }
 
 /**
@@ -390,234 +411,243 @@ function hideModal() {
  * @param {HTMLElement} buttonElement - The button element corresponding to the mode.
  */
 function activateMode(modeId, buttonElement) {
-	if (allWords.length === 0 && modeId !== "mode1") {
-		showToast("Please load words first using the 'Load Words' button.", "info");
-		return;
-	}
+  if (allWords.length === 0 && modeId !== "mode1") {
+    showToast("Please load words first using the 'Load Words' button.", "info");
+    return;
+  }
 
-	// If a modal is already open, close it first to clean up previous mode
-	if (currentMode !== null) {
-		hideModal(); // This will also call hideAllModes and stop processes
-	}
+  // If a modal is already open, close it first to clean up previous mode
+  if (currentMode !== null) {
+    hideModal(); // This will also call hideAllModes and stop processes
+  }
 
-	// Set the new current mode before showing it in the modal
-	currentMode = modeId;
+  // Set the new current mode before showing it in the modal
+  currentMode = modeId;
 
-	// Highlight the active mode button
-	document.querySelectorAll("#mode-selection button").forEach((btn) => {
-		btn.classList.remove("active");
-	});
-	buttonElement.classList.add("active");
+  // Highlight the active mode button
+  document.querySelectorAll("#mode-selection button").forEach((btn) => {
+    btn.classList.remove("active");
+  });
+  buttonElement.classList.add("active");
 
-	// Show the selected mode's content in the modal
-	if (modeId === "mode1") {
-		showModeInModal(mode1Section);
-		displayMode1(); // Populate the list
-	} else if (modeId === "mode2") {
-		showModeInModal(mode2Section);
-		// No immediate generation, wait for 'Start New Round' button click
-	} else if (modeId === "mode3") {
-		showModeInModal(mode3Section);
-		setupSpeechRecognitionForMode3(); // Setup recognition for this mode
-		// No immediate generation, wait for 'Start New Round' button click
-	}
+  // Show the selected mode's content in the modal
+  if (modeId === "mode1") {
+    showModeInModal(mode1Section);
+    displayMode1(); // Populate the list
+  } else if (modeId === "mode2") {
+    showModeInModal(mode2Section);
+    // No immediate generation, wait for 'Start New Round' button click
+  } else if (modeId === "mode3") {
+    showModeInModal(mode3Section);
+    setupSpeechRecognitionForMode3(); // Setup recognition for this mode
+    // No immediate generation, wait for 'Start New Round' button click
+  }
 }
 
 // ========================================
 // Mode 1: Full Word List
 // ========================================
-
 function displayMode1() {
-	wordListTableBody.innerHTML = ""; // Clear previous entries
+  wordListTableBody.innerHTML = ""; // Clear previous entries
 
-	if (allWords.length === 0) {
-		wordListTableBody.innerHTML =
-			'<tr><td colspan="5">No words loaded. Please load a word file.</td></tr>';
-		return;
-	}
+  if (allWords.length === 0) {
+    wordListTableBody.innerHTML =
+      '<tr><td colspan="5">No words loaded. Please load a word file.</td></tr>';
+    return;
+  }
 
-	allWords.forEach((word) => {
-		const row = wordListTableBody.insertRow();
-		const usageData = wordUsage[word.number] || { usedCount: 0, difficulty: 0 };
+  allWords.forEach((word) => {
+    const row = wordListTableBody.insertRow();
+    const usageData = wordUsage[word.number] || { usedCount: 0, difficulty: 0 };
 
-		row.insertCell().textContent = word.number;
-		const englishCell = row.insertCell();
-		englishCell.textContent = word.english;
-		englishCell.classList.add("clickable-english"); // Add class for styling and click event
-		englishCell.style.cursor = "pointer"; // Indicate clickability
-		englishCell.addEventListener("click", () =>
-			playPronunciation(word.voiceUrl)
-		);
+    row.insertCell().textContent = word.number;
 
-		row.insertCell().textContent = word.japanese;
-		const listenCell = row.insertCell();
-		const listenButton = document.createElement("button");
-		listenButton.textContent = "Listen";
-		listenButton.classList.add("button-group"); // Apply button styling
-		listenButton.onclick = () => playPronunciation(word.voiceUrl);
-		listenCell.appendChild(listenButton);
+    const englishCell = row.insertCell();
+    englishCell.textContent = word.english;
+    englishCell.classList.add("clickable-english"); // Add class for styling and click event
+    englishCell.style.cursor = "pointer"; // Indicate clickability
+    englishCell.addEventListener("click", () => playPronunciation(word.voiceUrl));
 
-		row.insertCell().textContent = `Used: ${usageData.usedCount}, Diff: ${usageData.difficulty}`;
-	});
+    row.insertCell().textContent = word.japanese;
+
+    const listenCell = row.insertCell();
+    const listenButton = document.createElement("button");
+    listenButton.textContent = "Listen";
+    listenButton.classList.add("button-group"); // Apply button styling
+    listenButton.onclick = () => playPronunciation(word.voiceUrl);
+    listenCell.appendChild(listenButton);
+
+    row.insertCell().textContent = `Used: ${usageData.usedCount}, Diff: ${usageData.difficulty}`;
+  });
 }
 
 // ========================================
 // Mode 2: Matching Flashcards
 // ========================================
-
 function generateMode2Flashcards() {
-	flashcardGridMode2.innerHTML = ""; // Clear existing cards
-	progressContainerMode2.classList.remove("hidden");
-	startMode2Btn.classList.add("hidden");
-	selectedCards = [];
-	matchedPairs = 0;
-	updateProgressBar(
-		progressBarFillMode2,
-		progressTextMode2,
-		matchedPairs,
-		NUM_FLASHCARDS,
-		"Matched"
-	);
+  // --- Start of Fix ---
+  // Ensure the grid is completely clear and interactive before adding new cards
+  flashcardGridMode2.innerHTML = "";
+  flashcardGridMode2.style.pointerEvents = "auto"; // Re-enable clicks explicitly
+  selectedCards = [];
+  matchedPairs = 0;
 
-	// Reset 'isUsedInCurrentRound' for all words before selecting
-	allWords.forEach((word) => (word.isUsedInCurrentRound = false));
+  progressContainerMode2.classList.remove("hidden");
+  startMode2Btn.classList.add("hidden"); // Hide the start button for the duration of the round
+  // --- End of Fix ---
 
-	const wordsForRound = selectWeightedRandomWords(allWords, NUM_FLASHCARDS);
+  updateProgressBar(
+    progressBarFillMode2,
+    progressTextMode2,
+    matchedPairs,
+    NUM_FLASHCARDS,
+    "Matched"
+  );
 
-	if (wordsForRound.length < NUM_FLASHCARDS) {
-		showToast(
-			`Not enough unique words (${wordsForRound.length}) to create ${NUM_FLASHCARDS} flashcards. Please add more words or reset usage data.`,
-			"error",
-			5000
-		);
-		startMode2Btn.classList.remove("hidden"); // Show button to retry
-		return;
-	}
+  // Reset 'isUsedInCurrentRound' for all words before selecting
+  allWords.forEach((word) => (word.isUsedInCurrentRound = false));
+  const wordsForRound = selectWeightedRandomWords(allWords, NUM_FLASHCARDS);
 
-	let cards = [];
-	wordsForRound.forEach((word) => {
-		// Use word.number as the unique ID for matching pairs
-		cards.push({
-			id: word.number,
-			type: "english",
-			content: word.english,
-			voiceUrl: word.voiceUrl,
-		});
-		cards.push({ id: word.number, type: "japanese", content: word.japanese });
-	});
+  if (wordsForRound.length < NUM_FLASHCARDS) {
+    showToast(
+      `Not enough unique words (${wordsForRound.length}) to create ${NUM_FLASHCARDS} flashcards. Please add more words or reset usage data.`,
+      "error",
+      5000
+    );
+    startMode2Btn.classList.remove("hidden"); // Show button to retry
+    return;
+  }
 
-	// Shuffle the cards
-	cards.sort(() => 0.5 - Math.random());
+  let cards = [];
+  wordsForRound.forEach((word) => {
+    // Use word.number as the unique ID for matching pairs
+    cards.push({
+      id: word.number,
+      type: "english",
+      content: word.english,
+      voiceUrl: word.voiceUrl,
+    });
+    cards.push({ id: word.number, type: "japanese", content: word.japanese });
+  });
 
-	cards.forEach((cardData) => {
-		const flashcard = document.createElement("div");
-		flashcard.classList.add("flashcard");
-		flashcard.dataset.id = cardData.id; // Common ID for the pair
-		flashcard.dataset.type = cardData.type; // 'english' or 'japanese'
-		flashcard.innerHTML = `<div class="flashcard-content">${cardData.content}</div>`;
+  // Shuffle the cards
+  cards.sort(() => 0.5 - Math.random());
 
-		if (cardData.type === "english") {
-			flashcard.addEventListener("click", () => {
-				playPronunciation(cardData.voiceUrl);
-				handleFlashcardClickMode2(flashcard);
-			});
-		} else {
-			flashcard.addEventListener("click", () =>
-				handleFlashcardClickMode2(flashcard)
-			);
-		}
-		flashcardGridMode2.appendChild(flashcard);
-	});
+  cards.forEach((cardData) => {
+    const flashcard = document.createElement("div");
+    flashcard.classList.add("flashcard");
+    flashcard.dataset.id = cardData.id; // Common ID for the pair
+    flashcard.dataset.type = cardData.type; // 'english' or 'japanese'
+    flashcard.innerHTML = `<div class="flashcard-content">${cardData.content}</div>`;
+
+    if (cardData.type === "english") {
+      flashcard.addEventListener("click", () => {
+        playPronunciation(cardData.voiceUrl);
+        handleFlashcardClickMode2(flashcard);
+      });
+    } else {
+      flashcard.addEventListener("click", () =>
+        handleFlashcardClickMode2(flashcard)
+      );
+    }
+    flashcardGridMode2.appendChild(flashcard);
+  });
 }
 
 function handleFlashcardClickMode2(clickedCard) {
-	// Ignore clicks on already cleared or selected cards, or if two cards are already flipped
-	if (
-		clickedCard.classList.contains("cleared") ||
-		clickedCard.classList.contains("match-selected") ||
-		selectedCards.length === 2
-	) {
-		return;
-	}
+  // Ignore clicks on already cleared or selected cards, or if two cards are already flipped
+  if (
+    clickedCard.classList.contains("cleared") ||
+    clickedCard.classList.contains("match-selected") ||
+    selectedCards.length === 2
+  ) {
+    return;
+  }
 
-	clickedCard.classList.add("match-selected"); // Visually mark as selected
-	selectedCards.push(clickedCard);
+  clickedCard.classList.add("match-selected"); // Visually mark as selected
+  selectedCards.push(clickedCard);
 
-	if (selectedCards.length === 2) {
-		const [card1, card2] = selectedCards;
+  if (selectedCards.length === 2) {
+    const [card1, card2] = selectedCards;
 
-		// Disable further clicks until match check is done
-		flashcardGridMode2.style.pointerEvents = "none";
+    // Disable further clicks until match check is done
+    flashcardGridMode2.style.pointerEvents = "none";
 
-		// Check if they are a matching pair (same ID, different types)
-		if (
-			card1.dataset.id === card2.dataset.id &&
-			card1.dataset.type !== card2.dataset.type
-		) {
-			// Match found!
-			showToast("Match!", "success", 1000);
-			card1.classList.remove("match-selected");
-			card2.classList.remove("match-selected");
-			card1.classList.add("cleared"); // Mark as cleared
-			card2.classList.add("cleared"); // Mark as cleared
+    // Check if they are a matching pair (same ID, different types)
+    if (
+      card1.dataset.id === card2.dataset.id &&
+      card1.dataset.type !== card2.dataset.type
+    ) {
+      // Match found!
+      showToast("Match!", "success", 1000);
+      card1.classList.remove("match-selected");
+      card2.classList.remove("match-selected");
+      card1.classList.add("cleared"); // Mark as cleared
+      card2.classList.add("cleared"); // Mark as cleared
 
-			matchedPairs++;
-			updateProgressBar(
-				progressBarFillMode2,
-				progressTextMode2,
-				matchedPairs,
-				NUM_FLASHCARDS,
-				"Matched"
-			);
+      matchedPairs++;
+      updateProgressBar(
+        progressBarFillMode2,
+        progressTextMode2,
+        matchedPairs,
+        NUM_FLASHCARDS,
+        "Matched"
+      );
 
-			// Update usage/difficulty for the matched word
-			const wordNumber = parseInt(card1.dataset.id);
-			if (wordUsage[wordNumber]) {
-				wordUsage[wordNumber].usedCount++;
-				// Decrease difficulty if matched correctly
-				wordUsage[wordNumber].difficulty = Math.max(
-					0,
-					wordUsage[wordNumber].difficulty - 1
-				);
-				saveWordUsage();
-			}
+      // Update usage/difficulty for the matched word
+      const wordNumber = parseInt(card1.dataset.id);
+      if (wordUsage[wordNumber]) {
+        wordUsage[wordNumber].usedCount++;
+        // Decrease difficulty if matched correctly
+        wordUsage[wordNumber].difficulty = Math.max(
+          0,
+          wordUsage[wordNumber].difficulty - 1
+        );
+        saveWordUsage();
+      }
 
-			if (matchedPairs === NUM_FLASHCARDS) {
-				setTimeout(() => {
-					showToast("Round Complete! Starting a new round...", "info", 2000);
-					generateMode2Flashcards(); // Start a new round automatically
-				}, 1000);
-			} else {
-				// Reset for next selection immediately if not end of round
-				selectedCards = [];
-				flashcardGridMode2.style.pointerEvents = "auto"; // Re-enable clicks
-			}
-		} else {
-			// No match
-			showToast("No match. Try again!", "error", 1000);
-			// Increment difficulty for the incorrect words
-			selectedCards.forEach((card) => {
-				const wordNumber = parseInt(card.dataset.id);
-				if (wordUsage[wordNumber]) {
-					wordUsage[wordNumber].difficulty++;
-					saveWordUsage();
-				}
-			});
+      if (matchedPairs === NUM_FLASHCARDS) {
+        setTimeout(() => {
+          showToast("Round Complete! Starting a new round...", "info", 2000);
+          // --- Start of Fix ---
+          // Reset state explicitly before starting a new round
+          selectedCards = [];
+          matchedPairs = 0;
+          flashcardGridMode2.style.pointerEvents = "auto"; // Ensure clicks are re-enabled
+          generateMode2Flashcards(); // Start a new round automatically
+          // --- End of Fix ---
+        }, 1000);
+      } else {
+        // Reset for next selection immediately if not end of round
+        selectedCards = [];
+        flashcardGridMode2.style.pointerEvents = "auto"; // Re-enable clicks
+      }
+    } else {
+      // No match
+      showToast("No match. Try again!", "error", 1000);
 
-			setTimeout(() => {
-				card1.classList.remove("match-selected");
-				card2.classList.remove("match-selected");
-				selectedCards = []; // Reset for next selection
-				flashcardGridMode2.style.pointerEvents = "auto"; // Re-enable clicks
-			}, FLASHCARD_MATCH_DELAY_MS);
-		}
-	}
+      // Increment difficulty for the incorrect words
+      selectedCards.forEach((card) => {
+        const wordNumber = parseInt(card.dataset.id);
+        if (wordUsage[wordNumber]) {
+          wordUsage[wordNumber].difficulty++;
+          saveWordUsage();
+        }
+      });
+
+      setTimeout(() => {
+        card1.classList.remove("match-selected");
+        card2.classList.remove("match-selected");
+        selectedCards = []; // Reset for next selection
+        flashcardGridMode2.style.pointerEvents = "auto"; // Re-enable clicks
+      }, FLASHCARD_MATCH_DELAY_MS);
+    }
+  }
 }
 
 // ========================================
 // Mode 3: Speak and Check Flashcards
 // ========================================
-
 /**
  * Levenshtein Distance function for comparing strings.
  * @param {string} s - First string.
@@ -625,24 +655,26 @@ function handleFlashcardClickMode2(clickedCard) {
  * @returns {number} The Levenshtein distance.
  */
 function levenshteinDistance(s, t) {
-	if (!s.length) return t.length;
-	if (!t.length) return s.length;
-	const matrix = Array(t.length + 1)
-		.fill(null)
-		.map(() => Array(s.length + 1).fill(null));
-	for (let i = 0; i <= t.length; i++) matrix[i][0] = i;
-	for (let j = 0; j <= s.length; j++) matrix[0][j] = j;
-	for (let i = 1; i <= t.length; i++) {
-		for (let j = 1; j <= s.length; j++) {
-			const cost = s[j - 1] === t[i - 1] ? 0 : 1;
-			matrix[i][j] = Math.min(
-				matrix[i - 1][j] + 1,
-				matrix[i][j - 1] + 1,
-				matrix[i - 1][j - 1] + cost
-			);
-		}
-	}
-	return matrix[t.length][s.length];
+  if (!s.length) return t.length;
+  if (!t.length) return s.length;
+  const matrix = Array(t.length + 1)
+    .fill(null)
+    .map(() => Array(s.length + 1).fill(null));
+
+  for (let i = 0; i <= t.length; i++) matrix[i][0] = i;
+  for (let j = 0; j <= s.length; j++) matrix[0][j] = j;
+
+  for (let i = 1; i <= t.length; i++) {
+    for (let j = 1; j <= s.length; j++) {
+      const cost = s[j - 1] === t[i - 1] ? 0 : 1;
+      matrix[i][j] = Math.min(
+        matrix[i - 1][j] + 1,
+        matrix[i][j - 1] + 1,
+        matrix[i - 1][j - 1] + cost
+      );
+    }
+  }
+  return matrix[t.length][s.length];
 }
 
 /**
@@ -651,10 +683,10 @@ function levenshteinDistance(s, t) {
  * @returns {string} Normalized text.
  */
 function normalizeText(text) {
-	return text
-		.toLowerCase()
-		.replace(/[.,!?;:]/g, "")
-		.trim();
+  return text
+    .toLowerCase()
+    .replace(/[.,!?;:]/g, "")
+    .trim();
 }
 
 /**
@@ -664,329 +696,367 @@ function normalizeText(text) {
  * @returns {{accuracy: number, troublesomeWords: string[]}} Accuracy percentage and list of troublesome words.
  */
 function calculateAccuracy(originalText, recognizedText) {
-	const normOriginal = normalizeText(originalText);
-	const normRecognized = normalizeText(recognizedText);
-	if (!normOriginal) return { accuracy: 0, troublesomeWords: [] };
-	if (!normRecognized)
-		return {
-			accuracy: 0,
-			troublesomeWords: normOriginal.split(/\s+/).filter(Boolean),
-		};
+  const normOriginal = normalizeText(originalText);
+  const normRecognized = normalizeText(recognizedText);
 
-	const distance = levenshteinDistance(normOriginal, normRecognized);
-	const maxLength = Math.max(normOriginal.length, normRecognized.length);
-	const accuracy = Math.round(
-		(maxLength === 0 ? 1 : 1 - distance / maxLength) * 100
-	);
+  if (!normOriginal) return { accuracy: 0, troublesomeWords: [] };
+  if (!normRecognized)
+    return { accuracy: 0, troublesomeWords: normOriginal.split(/\s+/).filter(Boolean) };
 
-	const originalWords = normOriginal.split(/\s+/).filter(Boolean);
-	const recognizedWordSet = new Set(
-		normRecognized.split(/\s+/).filter(Boolean)
-	);
-	const troublesomeWords = originalWords.filter(
-		(word) => !recognizedWordSet.has(word)
-	);
+  const distance = levenshteinDistance(normOriginal, normRecognized);
+  const maxLength = Math.max(normOriginal.length, normRecognized.length);
+  const accuracy = Math.round(
+    (maxLength === 0 ? 1 : 1 - distance / maxLength) * 100
+  );
 
-	return { accuracy, troublesomeWords };
+  const originalWords = normOriginal.split(/\s+/).filter(Boolean);
+  const recognizedWordSet = new Set(
+    normRecognized.split(/\s+/).filter(Boolean)
+  );
+  const troublesomeWords = originalWords.filter(
+    (word) => !recognizedWordSet.has(word)
+  );
+
+  return { accuracy, troublesomeWords };
 }
 
 /**
  * Sets up or reconfigures SpeechRecognition specifically for Mode 3.
  */
 function setupSpeechRecognitionForMode3() {
-	// Check for SpeechRecognition API support
-	const SpeechRecognition =
-		window.SpeechRecognition || window.webkitSpeechRecognition;
+  // Check for SpeechRecognition API support
+  const SpeechRecognition =
+    window.SpeechRecognition || window.webkitSpeechRecognition;
 
-	if (!SpeechRecognition) {
-		speechFeedback.textContent =
-			"Speech recognition is not supported in your browser. Please use a browser that supports it (e.g., Chrome, Firefox).";
-		startMode3Btn.disabled = true;
-		return;
-	} else {
-		// If supported, ensure button is enabled in case it was disabled by a previous error
-		startMode3Btn.disabled = false;
-	}
+  if (!SpeechRecognition) {
+    speechFeedback.textContent =
+      "Speech recognition is not supported in your browser. Please use a browser that supports it (e.g., Chrome, Firefox).";
+    startMode3Btn.disabled = true;
+    return;
+  } else {
+    // If supported, ensure button is enabled in case it was disabled by a previous error
+    startMode3Btn.disabled = false;
+  }
 
-	if (!recognition) {
-		recognition = new SpeechRecognition();
-	}
+  if (!recognition) {
+    recognition = new SpeechRecognition();
+  }
 
-	recognition.continuous = false; // Only get one result per recognition session
-	recognition.interimResults = false; // We want final result for checking
-	recognition.lang = "en-US"; // Always English for this mode's check
+  recognition.continuous = false; // Only get one result per recognition session
+  recognition.interimResults = false; // We want final result for checking
+  recognition.lang = "en-US"; // Always English for this mode's check
 
-	recognition.onstart = () => {
-		isRecording = true;
-		speechFeedback.textContent = "Listening... Speak now.";
-		speechFeedback.classList.remove("hidden");
-		startMode3Btn.classList.add("hidden");
-		stopSpeechBtn.classList.remove("hidden");
-		// Highlight the active card
-		const activeCard = document.querySelector(".flashcard.active-for-speech");
-		if (!activeCard) {
-			// If no active card, find the next one
-			loadNextSpeechFlashcard();
-		}
-	};
+  recognition.onstart = () => {
+    isRecording = true;
+    speechFeedback.textContent = "Listening... Speak now.";
+    speechFeedback.classList.remove("hidden");
+    startMode3Btn.classList.add("hidden");
+    stopSpeechBtn.classList.remove("hidden");
 
-	recognition.onresult = (event) => {
-		const transcript = event.results[0][0].transcript.toLowerCase().trim();
-		const confidence = event.results[0][0].confidence;
-		console.log("Recognized:", transcript, "Confidence:", confidence);
+    // Highlight the active card
+    const activeCard = document.querySelector(".flashcard.active-for-speech");
+    if (!activeCard) {
+      // If no active card, find the next one
+      loadNextSpeechFlashcard();
+    }
+  };
 
-		const activeCard = document.querySelector(".flashcard.active-for-speech");
-		if (activeCard && currentSpeechWord) {
-			const expectedEnglish = normalizeText(currentSpeechWord);
-			const { accuracy } = calculateAccuracy(expectedEnglish, transcript);
+  recognition.onresult = (event) => {
+    const transcript = event.results[0][0].transcript.toLowerCase().trim();
+    const confidence = event.results[0][0].confidence;
+    console.log("Recognized:", transcript, "Confidence:", confidence);
 
-			currentSpeechWordDisplay.textContent = `You said: "${transcript}"`;
+    const activeCard = document.querySelector(".flashcard.active-for-speech");
+    if (activeCard && currentSpeechWord) {
+      const expectedEnglish = normalizeText(currentSpeechWord);
+      const { accuracy } = calculateAccuracy(expectedEnglish, transcript);
+      currentSpeechWordDisplay.textContent = `You said: "${transcript}"`;
 
-			if (accuracy / 100 >= SPEECH_RECOGNITION_THRESHOLD) {
-				showToast(`Correct! Accuracy: ${accuracy}%`, "success");
-				speechFeedback.textContent = `Correct! Accuracy: ${accuracy}%`;
-				activeCard.classList.remove("active-for-speech");
-				activeCard.classList.add("cleared"); // Mark as cleared
-				correctSpeechCount++;
-				updateProgressBar(
-					progressBarFillMode3,
-					progressTextMode3,
-					correctSpeechCount,
-					NUM_FLASHCARDS,
-					"Correct"
-				);
+      if (accuracy / 100 >= SPEECH_RECOGNITION_THRESHOLD) {
+        showToast(`Correct! Accuracy: ${accuracy}%`, "success");
+        speechFeedback.textContent = `Correct! Accuracy: ${accuracy}%`;
+        activeCard.classList.remove("active-for-speech");
+        activeCard.classList.add("cleared"); // Mark as cleared
+        correctSpeechCount++;
+        updateProgressBar(
+          progressBarFillMode3,
+          progressTextMode3,
+          correctSpeechCount,
+          NUM_FLASHCARDS,
+          "Correct"
+        );
 
-				// Update usage and decrease difficulty
-				const wordNumber = parseInt(activeCard.dataset.id);
-				if (wordUsage[wordNumber]) {
-					wordUsage[wordNumber].usedCount++;
-					wordUsage[wordNumber].difficulty = Math.max(
-						0,
-						wordUsage[wordNumber].difficulty - 1
-					); // Decrease difficulty
-					saveWordUsage();
-				}
-				// Move to next card after a short delay
-				setTimeout(loadNextSpeechFlashcard, 1000);
-			} else {
-				showToast(`Incorrect. Accuracy: ${accuracy}%. Try again.`, "error");
-				speechFeedback.textContent = `Incorrect. Accuracy: ${accuracy}%. Expected: "${currentSpeechWord}"`;
-				// Increment difficulty
-				const wordNumber = parseInt(activeCard.dataset.id);
-				if (wordUsage[wordNumber]) {
-					wordUsage[wordNumber].difficulty++;
-					saveWordUsage();
-				}
-				// Optionally, auto-retry or wait for user to click start again
-				setTimeout(() => {
-					speechFeedback.textContent = "Please say the word above."; // Reset prompt
-					startSpeechRecognitionMode3(); // Auto-retry
-				}, 1500);
-			}
-		}
-	};
+        // Update usage and decrease difficulty
+        const wordNumber = parseInt(activeCard.dataset.id);
+        if (wordUsage[wordNumber]) {
+          wordUsage[wordNumber].usedCount++;
+          wordUsage[wordNumber].difficulty = Math.max(
+            0,
+            wordUsage[wordNumber].difficulty - 1
+          ); // Decrease difficulty
+          saveWordUsage();
+        }
 
-	recognition.onerror = (event) => {
-		isRecording = false; // Set to false on error
-		stopSpeechBtn.classList.add("hidden");
-		startMode3Btn.classList.remove("hidden"); // Show start button again
-		const activeCard = document.querySelector(".flashcard.active-for-speech");
-		if (activeCard) {
-			activeCard.classList.remove("active-for-speech");
-		}
+        // Move to next card after a short delay
+        setTimeout(loadNextSpeechFlashcard, 1000);
+      } else {
+        showToast(`Incorrect. Accuracy: ${accuracy}%. Try again.`, "error");
+        speechFeedback.textContent = `Incorrect. Accuracy: ${accuracy}%. Expected: "${currentSpeechWord}"`;
 
-		let errorMessage = `Speech recognition error: ${event.error}.`;
-		if (event.error === "no-speech") {
-			errorMessage = "No speech detected. Please try again.";
-		} else if (event.error === "not-allowed") {
-			errorMessage =
-				"Microphone access denied. Please allow in browser settings and restart the round.";
-			startMode3Btn.disabled = true; // Disable if permission denied
-		} else {
-			errorMessage = `Error: ${event.error}.`;
-		}
-		speechFeedback.textContent = errorMessage;
-		speechFeedback.classList.remove("hidden");
-		console.error("Speech recognition error:", event.error);
+        // Increment difficulty
+        const wordNumber = parseInt(activeCard.dataset.id);
+        if (wordUsage[wordNumber]) {
+          wordUsage[wordNumber].difficulty++;
+          saveWordUsage();
+        }
 
-		// If an error occurs, try to advance to the next card after a delay
-		// Only advance if it's not a persistent permission error
-		if (event.error !== "not-allowed") {
-			setTimeout(loadNextSpeechFlashcard, 2000);
-		}
-	};
+        // Optionally, auto-retry or wait for user to click start again
+        setTimeout(() => {
+          speechFeedback.textContent = "Please say the word above."; // Reset prompt
+          startSpeechRecognitionMode3(); // Auto-retry
+        }, 1500);
+      }
+    }
+  };
 
-	recognition.onend = () => {
-		isRecording = false; // Set to false on end
-		// If not all cards are cleared and not a permission error, show start button to continue
-		const activeCard = document.querySelector(".flashcard.active-for-speech");
-		if (correctSpeechCount < NUM_FLASHCARDS && !startMode3Btn.disabled) {
-			// Check if not disabled by 'not-allowed'
-			startMode3Btn.classList.remove("hidden");
-			stopSpeechBtn.classList.add("hidden");
-		}
-		if (activeCard) {
-			activeCard.classList.remove("active-for-speech");
-		}
-	};
+  recognition.onerror = (event) => {
+    isRecording = false; // Set to false on error
+    stopSpeechBtn.classList.add("hidden");
+    startMode3Btn.classList.remove("hidden"); // Show start button again
+
+    const activeCard = document.querySelector(".flashcard.active-for-speech");
+    if (activeCard) {
+      activeCard.classList.remove("active-for-speech");
+    }
+
+    let errorMessage = `Speech recognition error: ${event.error}.`;
+    if (event.error === "no-speech") {
+      errorMessage = "No speech detected. Please try again.";
+    } else if (event.error === "not-allowed") {
+      errorMessage =
+        "Microphone access denied. Please allow in browser settings and restart the round.";
+      startMode3Btn.disabled = true; // Disable if permission denied
+    } else {
+      errorMessage = `Error: ${event.error}.`;
+    }
+    speechFeedback.textContent = errorMessage;
+    speechFeedback.classList.remove("hidden");
+    console.error("Speech recognition error:", event.error);
+
+    // If an error occurs, try to advance to the next card after a delay
+    // Only advance if it's not a persistent permission error
+    if (event.error !== "not-allowed") {
+      setTimeout(loadNextSpeechFlashcard, 2000);
+    }
+  };
+
+  recognition.onend = () => {
+    isRecording = false; // Set to false on end
+
+    // If not all cards are cleared and not a permission error, show start button to continue
+    const activeCard = document.querySelector(".flashcard.active-for-speech");
+    if (correctSpeechCount < NUM_FLASHCARDS && !startMode3Btn.disabled) {
+      // Check if not disabled by 'not-allowed'
+      startMode3Btn.classList.remove("hidden");
+      stopSpeechBtn.classList.add("hidden");
+    }
+    if (activeCard) {
+      activeCard.classList.remove("active-for-speech");
+    }
+  };
 }
 
 /**
  * Starts the speech recognition for Mode 3.
  */
 function startSpeechRecognitionMode3() {
-	if (!recognition) {
-		setupSpeechRecognitionForMode3();
-		if (!recognition || startMode3Btn.disabled) return; // If setup failed or disabled, exit
-	}
-	if (!isRecording) {
-		recognition.start();
-	}
+  if (!recognition) {
+    setupSpeechRecognitionForMode3();
+    if (!recognition || startMode3Btn.disabled) return; // If setup failed or disabled, exit
+  }
+  if (!isRecording) {
+    recognition.start();
+  }
 }
 
 /**
  * Stops the speech recognition for Mode 3.
  */
 function stopSpeechRecognitionMode3() {
-	if (recognition && isRecording) {
-		recognition.stop();
-		isRecording = false; // Explicitly set to false immediately
-	}
+  if (recognition && isRecording) {
+    recognition.stop();
+    isRecording = false; // Explicitly set to false immediately
+  }
 }
 
 /**
  * Generates and initializes flashcards for the Speak & Check mode.
  */
 function generateMode3Flashcards() {
-	flashcardGridMode3.innerHTML = ""; // Clear existing cards
-	progressContainerMode3.classList.remove("hidden");
-	startMode3Btn.classList.add("hidden");
-	stopSpeechBtn.classList.remove("hidden");
-	correctSpeechCount = 0;
-	currentSpeechWord = null;
-	updateProgressBar(
-		progressBarFillMode3,
-		progressTextMode3,
-		correctSpeechCount,
-		NUM_FLASHCARDS,
-		"Correct"
-	);
-	currentSpeechWordDisplay.classList.remove("hidden");
-	speechFeedback.classList.remove("hidden");
+  flashcardGridMode3.innerHTML = ""; // Clear existing cards
+  progressContainerMode3.classList.remove("hidden");
+  startMode3Btn.classList.add("hidden");
+  stopSpeechBtn.classList.remove("hidden");
+  correctSpeechCount = 0;
+  currentSpeechWord = null;
+  updateProgressBar(
+    progressBarFillMode3,
+    progressTextMode3,
+    correctSpeechCount,
+    NUM_FLASHCARDS,
+    "Correct"
+  );
+  currentSpeechWordDisplay.classList.remove("hidden");
+  speechFeedback.classList.remove("hidden");
 
-	// Reset 'isUsedInCurrentRound' for all words before selecting
-	allWords.forEach((word) => (word.isUsedInCurrentRound = false));
+  // Reset 'isUsedInCurrentRound' for all words before selecting
+  allWords.forEach((word) => (word.isUsedInCurrentRound = false));
+  speechFlashcardDeck = selectWeightedRandomWords(allWords, NUM_FLASHCARDS);
 
-	speechFlashcardDeck = selectWeightedRandomWords(allWords, NUM_FLASHCARDS);
+  if (speechFlashcardDeck.length < NUM_FLASHCARDS) {
+    showToast(
+      `Not enough unique words (${speechFlashcardDeck.length}) to create ${NUM_FLASHCARDS} flashcards. Please add more words or reset usage data.`,
+      "error",
+      5000
+    );
+    startMode3Btn.classList.remove("hidden"); // Show button to retry
+    stopSpeechBtn.classList.add("hidden");
+    return;
+  }
 
-	if (speechFlashcardDeck.length < NUM_FLASHCARDS) {
-		showToast(
-			`Not enough unique words (${speechFlashcardDeck.length}) to create ${NUM_FLASHCARDS} flashcards. Please add more words or reset usage data.`,
-			"error",
-			5000
-		);
-		startMode3Btn.classList.remove("hidden"); // Show button to retry
-		stopSpeechBtn.classList.add("hidden");
-		return;
-	}
+  currentSpeechCardIndex = -1; // Reset index for the new round
+  speechFlashcardDeck.forEach((word) => {
+    const flashcard = document.createElement("div");
+    flashcard.classList.add("flashcard");
+    flashcard.dataset.id = word.number;
+    flashcard.innerHTML = `<div class="flashcard-content">${word.japanese}</div>`; // Display Japanese
+    flashcard.addEventListener("click", () => {
+      // Play English pronunciation if available
+      playPronunciation(word.voiceUrl);
+      showToast(`English: ${word.english}`, "info", 2000); // Show English word
+    });
+    flashcardGridMode3.appendChild(flashcard);
+  });
 
-	currentSpeechCardIndex = -1; // Reset index for the new round
-
-	speechFlashcardDeck.forEach((word) => {
-		const flashcard = document.createElement("div");
-		flashcard.classList.add("flashcard");
-		flashcard.dataset.id = word.number;
-		flashcard.dataset.english = word.english; // Store English for comparison
-		flashcard.dataset.voiceUrl = word.voiceUrl;
-
-		// Display Japanese, user speaks English
-		flashcard.innerHTML = `<div class="flashcard-content">${word.japanese}</div>
-                                       <div class="flashcard-translation hidden">${word.english}</div>`; // Hidden for initial prompt
-
-		// Click to hear English pronunciation
-		flashcard.addEventListener("click", () => {
-			playPronunciation(word.voiceUrl);
-			// Optionally, reveal English temporarily
-			const translationDiv = flashcard.querySelector(".flashcard-translation");
-			if (translationDiv) {
-				translationDiv.classList.remove("hidden");
-				setTimeout(() => translationDiv.classList.add("hidden"), 2000);
-			}
-		});
-
-		flashcardGridMode3.appendChild(flashcard);
-	});
-
-	loadNextSpeechFlashcard(); // Display the first card and start listening
+  loadNextSpeechFlashcard(); // Load the first word
 }
 
-/**
- * Loads and displays the next word for the user to speak in Mode 3.
- * Automatically starts speech recognition if not already active.
- */
 function loadNextSpeechFlashcard() {
-	const remainingCards = Array.from(
-		flashcardGridMode3.querySelectorAll(".flashcard:not(.cleared)")
-	);
-	flashcardGridMode3
-		.querySelectorAll(".flashcard")
-		.forEach((card) => card.classList.remove("active-for-speech"));
+  // Stop current recognition before starting a new one
+  stopSpeechRecognitionMode3();
 
-	if (remainingCards.length > 0) {
-		currentSpeechCardIndex++; // Advance the index
-		const nextCard = remainingCards[0]; // Always take the first uncleared card
-		nextCard.classList.add("active-for-speech");
-		currentSpeechWord = nextCard.dataset.english;
-		currentSpeechWordDisplay.textContent = `Say: "${currentSpeechWord}"`;
-		speechFeedback.textContent = "Listening... Speak now.";
-		startSpeechRecognitionMode3(); // Start listening for the new word
-	} else {
-		showToast("Round Complete! Starting a new round...", "info", 2000);
-		setTimeout(generateMode3Flashcards, 1000); // Start a new round automatically
-	}
+  // Clear previous speech feedback
+  speechFeedback.textContent = "";
+  currentSpeechWordDisplay.textContent = "";
+
+  const currentActiveCard = document.querySelector(".flashcard.active-for-speech");
+  if (currentActiveCard) {
+    currentActiveCard.classList.remove("active-for-speech");
+  }
+
+  // Check if all cards are cleared
+  if (correctSpeechCount === NUM_FLASHCARDS) {
+    showToast("Round Complete!", "success", 3000);
+    speechFeedback.textContent = "Round Complete! Click 'Start New Round' to play again.";
+    stopSpeechBtn.classList.add("hidden");
+    startMode3Btn.classList.remove("hidden"); // Show start button
+    currentSpeechWordDisplay.classList.add("hidden");
+    return;
+  }
+
+  // Find the next non-cleared card
+  let nextCardFound = false;
+  for (let i = 0; i < speechFlashcardDeck.length; i++) {
+    const cardElement = flashcardGridMode3.children[i];
+    if (!cardElement.classList.contains("cleared")) {
+      currentSpeechCardIndex = i;
+      currentSpeechWord = speechFlashcardDeck[i].english;
+
+      cardElement.classList.add("active-for-speech"); // Highlight current card
+      currentSpeechWordDisplay.textContent = `Say: "${currentSpeechWord}"`; // Prompt user
+      currentSpeechWordDisplay.classList.remove("hidden");
+      speechFeedback.textContent = "Click 'Stop Listening' to pause.";
+      speechFeedback.classList.remove("hidden");
+
+      startSpeechRecognitionMode3(); // Start listening for this word
+      nextCardFound = true;
+      break;
+    }
+  }
+
+  if (!nextCardFound && correctSpeechCount < NUM_FLASHCARDS) {
+    // This case should ideally not happen if correctSpeechCount is less than NUM_FLASHCARDS
+    // but all cards are marked cleared. It's a safeguard.
+    showToast("Something went wrong, unable to find next card.", "error", 3000);
+    console.error("No next card found, but not all cards are cleared.");
+    stopSpeechBtn.classList.add("hidden");
+    startMode3Btn.classList.remove("hidden"); // Show start button
+    currentSpeechWordDisplay.classList.add("hidden");
+  }
 }
+
 
 // ========================================
 // Event Listeners
 // ========================================
 
+/**
+ * Checks for a 'list' query parameter in the URL and attempts to load words.
+ * If not found, it ensures the configuration section is visible.
+ * It also applies the saved or system-preferred theme.
+ */
 document.addEventListener("DOMContentLoaded", () => {
-	applyTheme(); // Apply saved theme on load
-	loadWordUsage(); // Load word usage data from localStorage
+  applyTheme();
+  loadWordUsage(); // Load usage data early
 
-	// Try to load a default URL or a previously saved one
-	const savedUrl = localStorage.getItem("lastWordFileUrl");
-	if (savedUrl) {
-		wordFileUrlInput.value = savedUrl;
-	} else {
-		// Default placeholder for a word list
-		wordFileUrlInput.value = "https://flashcards.isesaki.in/assets/list.csv";
-	}
+  // Listen for changes in the system's preferred color scheme
+  // This allows the theme to change automatically if the user adjusts OS settings
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+      // Only switch if the user hasn't explicitly set a theme in localStorage
+      if (localStorage.getItem("darkMode") === null) {
+          if (event.matches) {
+              document.documentElement.classList.add("dark-mode");
+          } else {
+              document.documentElement.classList.remove("dark-mode");
+          }
+      }
+  });
 
-	// Load words automatically if a URL is present
-	if (wordFileUrlInput.value) {
-		loadWords();
-	}
+  const urlParams = new URLSearchParams(window.location.search);
+  const listUrl = urlParams.get('list');
+  
+  // 1. Check if a word list URL is provided in the query parameter
+  if (listUrl) {
+    // Set the input field value from the query parameter
+    wordFileUrlInput.value = listUrl;
+    
+    // Automatically attempt to load words
+    // The loadWords function will handle status updates and hiding config on success
+    loadWords(); 
+  } else {
+    // 2. If no query parameter, ensure the config section is visible 
+    //    so the user is prompted to load a list manually.
+    configSection.classList.remove("hidden");
+    loadStatusElement.textContent = "Please load a word list to begin.";
+    loadStatusElement.classList.remove("hidden");
+  }
 });
 
 loadWordsBtn.addEventListener("click", () => {
-	localStorage.setItem("lastWordFileUrl", wordFileUrlInput.value); // Save the URL
-	loadWords();
+  loadWords();
 });
 
-// Mode selection buttons
 mode1Btn.addEventListener("click", () => activateMode("mode1", mode1Btn));
 mode2Btn.addEventListener("click", () => activateMode("mode2", mode2Btn));
 mode3Btn.addEventListener("click", () => activateMode("mode3", mode3Btn));
 
-// Modal close button
-modalCloseBtn.addEventListener("click", hideModal);
-
-// Mode 2 specific
 startMode2Btn.addEventListener("click", generateMode2Flashcards);
-
-// Mode 3 specific
-startMode3Btn.addEventListener("click", generateMode3Flashcards); // Start a new round of mode 3
+startMode3Btn.addEventListener("click", generateMode3Flashcards);
 stopSpeechBtn.addEventListener("click", stopSpeechRecognitionMode3);
 
-// script.js content ends here
+modalCloseBtn.addEventListener("click", hideModal);
+appModal.addEventListener("click", (event) => {
+  if (event.target === appModal) {
+    hideModal();
+  }
+});
