@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Word Learning App by TGMGroup</title>
+		<link rel="stylesheet" href="assets/styles.css" />
+		<link rel="icon" type="image/x-icon" href="assets/home/icon.png" />
+		<link id="favicon" rel="shortcut icon" href="assets/home/icon.png" />
+	</head>
+	<body>
+		<div class="container">
+			<h1>Let's Review Your Vocabulary!</h1>
+			<br /><br /><br />
+
+			<button id="theme-toggle" aria-label="Toggle dark mode"></button>
+
+			<div id="config-section">
+				<h2>Configuration</h2>
+				<label for="wordFileUrl"
+					>Word List URL (CSV: number,English,Japanese,voice_url):</label
+				>
+				<input
+					type="text"
+					id="wordFileUrl"
+					placeholder="e.g., https://example.com/words.csv"
+					value="https://flashcards.isesaki.in/vocabulary/assets/list.csv"
+				/>
+				<button id="loadWordsBtn" class="button-group">Load Words</button>
+				<p class="status-message" id="loadStatus"></p>
+			</div>
+
+			<div class="button-group" id="mode-selection">
+				<button id="mode1Btn" class="active">Mode 1: Full List</button>
+				<button id="mode2Btn">Mode 2: Matching Flashcards</button>
+				<button id="mode3Btn">Mode 3: Speak & Check</button>
+			</div>
+		</div>
+
+		<!-- The Modal Overlay -->
+		<div id="appModal" class="modal hidden">
+			<div class="modal-content">
+				<span class="modal-close" id="modalCloseBtn">&times;</span>
+				<div id="modalContentArea">
+					<!-- Mode content will be dynamically moved here -->
+				</div>
+			</div>
+		</div>
+
+		<!-- Original mode sections are now hidden by default and moved into the modal -->
+		<div id="mode1" class="mode-section hidden">
+			<h2>Full Word List</h2>
+			<div id="word-list-container">
+				<table id="word-list-table">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>English</th>
+							<th>Japanese</th>
+							<th>Listen</th>
+							<th>Usage/Difficulty</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- Word list will be populated here by JavaScript -->
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div id="mode2" class="mode-section hidden">
+			<h2>Matching Flashcards</h2>
+			<div id="flashcard-grid-mode2" class="flashcard-grid">
+				<!-- Flashcards will be populated here by JavaScript -->
+			</div>
+			<div id="progress-container-mode2" class="hidden">
+				<span id="progress-text-mode2">0/10 Matched</span>
+				<div id="progress-bar-container-mode2">
+					<div id="progress-bar-fill-mode2"></div>
+				</div>
+			</div>
+			<div class="button-group">
+				<button id="startMode2Btn">Start New Round</button>
+			</div>
+		</div>
+
+		<div id="mode3" class="mode-section hidden">
+			<h2>Speak the English Word</h2>
+			<div id="flashcard-grid-mode3" class="flashcard-grid">
+				<!-- Flashcards will be populated here by JavaScript -->
+			</div>
+			<p id="currentSpeechWordDisplay" class="status-message hidden"></p>
+			<p id="speechFeedback" class="status-message hidden"></p>
+			<div id="progress-container-mode3" class="hidden">
+				<span id="progress-text-mode3">0/10 Correct</span>
+				<div id="progress-bar-container-mode3">
+					<div id="progress-bar-fill-mode3"></div>
+				</div>
+			</div>
+			<div class="button-group">
+				<button id="startMode3Btn">Start New Round</button>
+				<button id="stopSpeechBtn" class="hidden">Stop Listening</button>
+			</div>
+		</div>
+
+		<audio id="audioPlayer"></audio>
+		<div id="toast-container"></div>
+
+		<script src="assets/scripts.js"></script>
+	</body>
+</html>

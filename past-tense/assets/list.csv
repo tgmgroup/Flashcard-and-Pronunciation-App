@@ -1,0 +1,80 @@
+﻿1,～である、～いる ,be ,assets/audio/1a.mp3, I am happy.,assets/audio/1ex_present.mp3,was,assets/audio/1b.mp3, I was sad,assets/audio/1ex_past.mp3
+1,～である、～いる ,be ,assets/audio/1a.mp3, I am happy.,assets/audio/1ex_present.mp3,were,assets/audio/1ba.mp3,They were angry.,assets/audio/1exa_past.mp3
+2,する ,do ,assets/audio/2a.mp3, I do my homework every day.,assets/audio/2ex_present.mp3,did ,assets/audio/2b.mp3, I did my homework yesterday.,assets/audio/2ex_past.mp3
+3,買う ,buy ,assets/audio/3a.mp3, I buy milk at the supermarket.,assets/audio/3ex_present.mp3,bought ,assets/audio/3b.mp3, I bought a pen today.,assets/audio/3ex_past.mp3
+4,持ってくる ,bring ,assets/audio/4a.mp3, Please bring a flower to school.,assets/audio/4ex_present.mp3,brought ,assets/audio/4b.mp3, I brought a flower to class.,assets/audio/4ex_past.mp3
+5,戦う ,fight ,assets/audio/5a.mp3, We do not fight in school.,assets/audio/5ex_present.mp3,fought ,assets/audio/5b.mp3, The boys fought a little.,assets/audio/5ex_past.mp3
+6,思う ,think ,assets/audio/6a.mp3, I think a lot.,assets/audio/6ex_present.mp3,thought ,assets/audio/6b.mp3, I thought of you.,assets/audio/6ex_past.mp3
+7,教える ,teach ,assets/audio/7a.mp3, My teacher teaches me to read.,assets/audio/7ex_present.mp3,taught ,assets/audio/7b.mp3, My teacher taught me well.,assets/audio/7ex_past.mp3
+8,つかまえる ,catch ,assets/audio/8a.mp3, I usually catch the ball.,assets/audio/8ex_present.mp3,caught ,assets/audio/8b.mp3, I caught the ball.,assets/audio/8ex_past.mp3
+9,建てる ,build ,assets/audio/9a.mp3, We build big towers in Tokyo.,assets/audio/9ex_present.mp3,built ,assets/audio/9b.mp3, We built a big tower called Tokyo Sky Tree.,assets/audio/9ex_past.mp3
+10,貸す ,lend ,assets/audio/10a.mp3, I often lend you pencils.,assets/audio/10ex_present.mp3,lent ,assets/audio/10b.mp3, I lent him my pen.,assets/audio/10ex_past.mp3
+11,送る ,send ,assets/audio/11a.mp3, I send my family a Christmas card every year.,assets/audio/11ex_present.mp3,sent ,assets/audio/11b.mp3, I sent an email to my uncle.,assets/audio/11ex_past.mp3
+12,過ごす ,spend ,assets/audio/12a.mp3, I spend my money on idol goods.,assets/audio/12ex_present.mp3,spent ,assets/audio/12b.mp3, I spent all my money at the concert.,assets/audio/12ex_past.mp3
+13,感じる ,feel ,assets/audio/13a.mp3, I feel sick today.,assets/audio/13ex_present.mp3,felt ,assets/audio/13b.mp3, I felt much better last night.,assets/audio/13ex_past.mp3
+14,持ち続ける ,keep ,assets/audio/14a.mp3, I always keep my promises.,assets/audio/14ex_present.mp3,kept ,assets/audio/14b.mp3, She kept my secret.,assets/audio/14ex_past.mp3
+15,出発する ,leave ,assets/audio/15a.mp3, I leave at 7:30 every morning.,assets/audio/15ex_present.mp3,left ,assets/audio/15b.mp3, I left at 8 this morning.,assets/audio/15ex_past.mp3
+16,失う ,lose ,assets/audio/16a.mp3, I sometimes lose my keys.,assets/audio/16ex_present.mp3,lost ,assets/audio/16b.mp3, I lost my shoe at school.,assets/audio/16ex_past.mp3
+17,眠る ,sleep ,assets/audio/17a.mp3, I sleep in my bed.,assets/audio/17ex_present.mp3,slept ,assets/audio/17b.mp3, I slept for ten hours.,assets/audio/17ex_past.mp3
+18,～を横にする ,lay ,assets/audio/18a.mp3, Nurses lay babies on beds at the hospital.,assets/audio/18ex_present.mp3,laid ,assets/audio/18b.mp3, I laid the baby on the bed.,assets/audio/18ex_past.mp3
+19,支払う ,pay ,assets/audio/19a.mp3, I always pay for my food at restaurants.,assets/audio/19ex_present.mp3,paid ,assets/audio/19b.mp3, I paid the bill yesterday.,assets/audio/19ex_past.mp3
+20,言う ,say ,assets/audio/20a.mp3," I say ""hello"" to my friends.",assets/audio/20ex_present.mp3,said ,assets/audio/20b.mp3," I said ""hello"" to my teacher this morning.",assets/audio/20ex_past.mp3
+21,売る ,sell ,assets/audio/21a.mp3, I sometimes sell my old toys.,assets/audio/21ex_present.mp3,sold ,assets/audio/21b.mp3, He sold his toys to the store.,assets/audio/21ex_past.mp3
+22,話す、知らせる ,tell ,assets/audio/22a.mp3, Please tell me a story.,assets/audio/22ex_present.mp3,told ,assets/audio/22b.mp3, She told a funny joke.,assets/audio/22ex_past.mp3
+23,つかむ ,hold ,assets/audio/23a.mp3, I sometimes hold my mother’s hand.,assets/audio/23ex_present.mp3,held ,assets/audio/23b.mp3, I held my mother’s hand tightly.,assets/audio/23ex_past.mp3
+24,作る ,make ,assets/audio/24a.mp3, I make a cake every year for my birthday.,assets/audio/24ex_present.mp3,made ,assets/audio/24b.mp3, I made a card for my friend’s birthday this year.,assets/audio/24ex_past.mp3
+25,餌を与える ,feed ,assets/audio/25a.mp3, I feed my fish every day.,assets/audio/25ex_present.mp3,fed ,assets/audio/25b.mp3, I fed the dog this morning.,assets/audio/25ex_past.mp3
+26,会う ,meet ,assets/audio/26a.mp3, I meet my friends at school.,assets/audio/26ex_present.mp3,met ,assets/audio/26b.mp3, We met at the park today.,assets/audio/26ex_past.mp3
+27,導く ,lead ,assets/audio/27a.mp3, I lead the brass band at practices.,assets/audio/27ex_present.mp3,led ,assets/audio/27b.mp3, She led the group this time.,assets/audio/27ex_past.mp3
+28,もっている ,have ,assets/audio/28a.mp3, We have a dog.,assets/audio/28ex_present.mp3,had ,assets/audio/28b.mp3, We had a cat last year.,assets/audio/28ex_past.mp3
+29,座る ,sit ,assets/audio/29a.mp3, I sit on the chair at school.,assets/audio/29ex_present.mp3,sat ,assets/audio/29b.mp3, I sat down in my friend’s chair.,assets/audio/29ex_past.mp3
+30,見つける、分かる ,find ,assets/audio/30a.mp3, I often find my dog outside.,assets/audio/30ex_present.mp3,found ,assets/audio/30b.mp3, I found my dog under the bed.,assets/audio/30ex_past.mp3
+31,立っている ,stand ,assets/audio/31a.mp3, I never stand up after swimming.,assets/audio/31ex_present.mp3,stood ,assets/audio/31b.mp3, She stood by the door before class.,assets/audio/31ex_past.mp3
+32,理解する ,understand ,assets/audio/32a.mp3, I understand the English lessons at school.,assets/audio/32ex_present.mp3,understood ,assets/audio/32b.mp3, I understood the story today.,assets/audio/32ex_past.mp3
+33,勝つ ,win ,assets/audio/33a.mp3, I win every baseball game.,assets/audio/33ex_present.mp3,won ,assets/audio/33b.mp3, We won a prize at the tournament.,assets/audio/33ex_past.mp3
+34,切る ,cut ,assets/audio/34a.mp3, I cut paper sometimes in art class. ,assets/audio/34ex_present.mp3,cut ,assets/audio/34b.mp3, I cut the paper in half.,assets/audio/34ex_past.mp3
+35,打つ ,hit ,assets/audio/35a.mp3, We hit the ball in tennis.,assets/audio/35ex_present.mp3,hit ,assets/audio/35b.mp3, I hit the ball out of the court.,assets/audio/35ex_past.mp3
+36,傷つける ,hurt ,assets/audio/36a.mp3, My feet hurt every day. ,assets/audio/36ex_present.mp3,hurt ,assets/audio/36b.mp3, My foot hurt after the basketball game.,assets/audio/36ex_past.mp3
+37,～させる ,let ,assets/audio/37a.mp3, Please let me play the game. ,assets/audio/37ex_present.mp3,let ,assets/audio/37b.mp3, He let me play the game.,assets/audio/37ex_past.mp3
+38,置く ,put ,assets/audio/38a.mp3, I put my lunch in my bag every morning. ,assets/audio/38ex_present.mp3,put ,assets/audio/38b.mp3, I put the garbage outside this morning.,assets/audio/38ex_past.mp3
+39,読む ,read ,assets/audio/39a.mp3, I read a book every day. ,assets/audio/39ex_present.mp3,read ,assets/audio/39b.mp3, I read a book last night.,assets/audio/39ex_past.mp3
+40,置く ,set ,assets/audio/40a.mp3, I set the table for dinner.,assets/audio/40ex_present.mp3,set,assets/audio/40b.mp3, I set the table 10 minutes ago.,assets/audio/40ex_past.mp3
+41,聞く ,hear ,assets/audio/41a.mp3, I hear birds every morning.,assets/audio/41ex_present.mp3,heard,assets/audio/41b.mp3, I heard a loud noise.,assets/audio/41ex_past.mp3
+42,意味する ,mean ,assets/audio/42a.mp3, What does that mean?,assets/audio/42ex_present.mp3,meant,assets/audio/42b.mp3, She meant she wanted to help.,assets/audio/42ex_past.mp3
+43,始める ,begin ,assets/audio/43a.mp3, We begin exercising every morning.,assets/audio/43ex_present.mp3,began,assets/audio/43b.mp3, The show began at three.,assets/audio/43ex_past.mp3
+44,飲む ,drink ,assets/audio/44a.mp3, I drink milk with my lunch.,assets/audio/44ex_present.mp3,drank,assets/audio/44b.mp3, He drank all the juice.,assets/audio/44ex_past.mp3
+45,鳴る ,ring ,assets/audio/45a.mp3, The phone rings all the time.,assets/audio/45ex_present.mp3,rang,assets/audio/45b.mp3, The bell rang loudly after class.,assets/audio/45ex_past.mp3
+46,歌う ,sing ,assets/audio/46a.mp3, I sing in the shower.,assets/audio/46ex_present.mp3,sang,assets/audio/46b.mp3, We sang together at karaoke.,assets/audio/46ex_past.mp3
+47,沈む ,sink ,assets/audio/47a.mp3, Some ships sink in storms.,assets/audio/47ex_present.mp3,sank,assets/audio/47b.mp3, The boat sank after the storm.,assets/audio/47ex_past.mp3
+48,泳ぐ ,swim ,assets/audio/48a.mp3, I swim in the pool in the summer.,assets/audio/48ex_present.mp3,swam,assets/audio/48b.mp3, I swam in the lake last summer.,assets/audio/48ex_past.mp3
+49,吹く ,blow ,assets/audio/49a.mp3, We blow out candles on birthday cakes.,assets/audio/49ex_present.mp3,blew,assets/audio/49b.mp3, The wind blew hard during the storm.,assets/audio/49ex_past.mp3
+50,描く ,draw ,assets/audio/50a.mp3, I draw pictures in art class.,assets/audio/50ex_present.mp3,drew,assets/audio/50b.mp3, I drew a house last time.,assets/audio/50ex_past.mp3
+51,成長する ,grow ,assets/audio/51a.mp3, Flowers grow in spring.,assets/audio/51ex_present.mp3,grew,assets/audio/51b.mp3, I grew bigger this year.,assets/audio/51ex_past.mp3
+52,知っている ,know ,assets/audio/52a.mp3, I know the answer.,assets/audio/52ex_present.mp3,knew,assets/audio/52b.mp3, I knew Mr. Jones ten years ago.,assets/audio/52ex_past.mp3
+53,飛ぶ ,fly ,assets/audio/53a.mp3, Butterflies fly to Mexico every year.,assets/audio/53ex_present.mp3,flew,assets/audio/53b.mp3, The plane flew high.,assets/audio/53ex_past.mp3
+54,投げる ,throw ,assets/audio/54a.mp3, Pitchers throw the ball in baseball.,assets/audio/54ex_present.mp3,threw,assets/audio/54b.mp3, He threw the drink bottle away after lunch.,assets/audio/54ex_past.mp3
+55,見せる ,show ,assets/audio/55a.mp3, I can show you my house.,assets/audio/55ex_present.mp3,showed,assets/audio/55b.mp3, I showed her my cat.,assets/audio/55ex_past.mp3
+56,運転する ,drive ,assets/audio/56a.mp3, I drive my car to school.,assets/audio/56ex_present.mp3,drove,assets/audio/56b.mp3, Dad drove me home.,assets/audio/56ex_past.mp3
+57,乗る ,ride ,assets/audio/57a.mp3, I ride my bike sometimes.,assets/audio/57ex_present.mp3,rode,assets/audio/57b.mp3, We rode the bus home.,assets/audio/57ex_past.mp3
+58,昇る ,rise ,assets/audio/58a.mp3, The sun rises in the east.,assets/audio/58ex_present.mp3,rose,assets/audio/58b.mp3, The balloon rose high.,assets/audio/58ex_past.mp3
+59,書く ,write ,assets/audio/59a.mp3, We write our names on worksheets.,assets/audio/59ex_present.mp3,wrote,assets/audio/59b.mp3, I wrote my name in English on the test.,assets/audio/59ex_past.mp3
+60,目を覚ます ,wake ,assets/audio/60a.mp3, I wake up early.,assets/audio/60ex_present.mp3,woke,assets/audio/60b.mp3, I woke up at six.,assets/audio/60ex_past.mp3
+61,壊す ,break ,assets/audio/61a.mp3, I do not break my toys.,assets/audio/61ex_present.mp3,broke,assets/audio/61b.mp3, I broke the window.,assets/audio/61ex_past.mp3
+62,盗む ,steal ,assets/audio/62a.mp3, Do not steal.,assets/audio/62ex_present.mp3,stole,assets/audio/62b.mp3, Someone stole the grapes.,assets/audio/62ex_past.mp3
+63,話す ,speak ,assets/audio/63a.mp3, I speak English at school.,assets/audio/63ex_present.mp3,spoke,assets/audio/63b.mp3, I spoke to the teacher.,assets/audio/63ex_past.mp3
+64,選ぶ ,choose ,assets/audio/64a.mp3, I usually choose bread for breakfast.,assets/audio/64ex_present.mp3,chose,assets/audio/64b.mp3, She chose a good book.,assets/audio/64ex_past.mp3
+65,与える ,give ,assets/audio/65a.mp3, My parents give me presents for Christmas.,assets/audio/65ex_present.mp3,gave,assets/audio/65b.mp3, He gave me a sticker.,assets/audio/65ex_past.mp3
+66,得る ,get ,assets/audio/66a.mp3, I get new pencils at Aeon.,assets/audio/66ex_present.mp3,got,assets/audio/66b.mp3, I got a new pencil last weekend.,assets/audio/66ex_past.mp3
+67,忘れる ,forget ,assets/audio/67a.mp3, I sometimes forget things.,assets/audio/67ex_present.mp3,forgot,assets/audio/67b.mp3, I forgot my lunch today.,assets/audio/67ex_past.mp3
+68,食べる ,eat ,assets/audio/68a.mp3, I eat all my food.,assets/audio/68ex_present.mp3,ate,assets/audio/68b.mp3, I ate all the pizza.,assets/audio/68ex_past.mp3
+69,落ちる ,fall ,assets/audio/69a.mp3, I fall down sometimes.,assets/audio/69ex_present.mp3,fell,assets/audio/69b.mp3, I fell on the ground.,assets/audio/69ex_past.mp3
+70,持っていく ,take ,assets/audio/70a.mp3, We always take a raincoat to school on rainy days.,assets/audio/70ex_present.mp3,took,assets/audio/70b.mp3, I took my cat to the doctor.,assets/audio/70ex_past.mp3
+71,行く ,go ,assets/audio/71a.mp3, I go to school in the morning.,assets/audio/71ex_present.mp3,went,assets/audio/71b.mp3, I went to the park.,assets/audio/71ex_past.mp3
+72,身につける ,wear ,assets/audio/72a.mp3, We wear black socks to school.,assets/audio/72ex_present.mp3,wore,assets/audio/72b.mp3, I wore my boots to camp.,assets/audio/72ex_past.mp3
+73,見る ,see ,assets/audio/73a.mp3, I see birds on my way to school.,assets/audio/73ex_present.mp3,saw,assets/audio/73b.mp3, I saw a bird fly.,assets/audio/73ex_past.mp3
+74,来る ,come ,assets/audio/74a.mp3, Please come here.,assets/audio/74ex_present.mp3,came,assets/audio/74b.mp3, The bus came late.,assets/audio/74ex_past.mp3
+75,～になる ,become ,assets/audio/75a.mp3, We become smart if we study hard.,assets/audio/75ex_present.mp3,became,assets/audio/75b.mp3, She became a doctor.,assets/audio/75ex_past.mp3
+76,走る ,run ,assets/audio/76a.mp3, I can run fast.,assets/audio/76ex_present.mp3,ran,assets/audio/76b.mp3, I ran after the bus.,assets/audio/76ex_past.mp3
+77,嘘をつく ,lie,assets/audio/77a.mp3, I don't lie.,assets/audio/77ex_present.mp3,lied,assets/audio/77b.mp3, He lied about the cookie.,assets/audio/77ex_past.mp3
+78,横になる ,lie ,assets/audio/78a.mp3, I always lie on the sofa after school.,assets/audio/78ex_present.mp3,lay,assets/audio/78b.mp3, I lay in bed for an hour after school.,assets/audio/78ex_past.mp3
+79,横にする・卵を産む,lay ,assets/audio/79a.mp3, I lay the baby on the bed.,assets/audio/79ex_present.mp3,laid,assets/audio/79b.mp3, I laid the book down on the table.,assets/audio/79ex_past.mp3
