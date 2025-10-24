@@ -485,8 +485,8 @@ function displayMode1() {
     presentCell.innerHTML = `
         <span class="clickable-english" style="cursor: pointer; font-weight: bold;" 
               onclick="playPronunciation('${word.presentVoiceUrl}')">${word.present}</span><br>
-        <span class="clickable-english" style="cursor: pointer; font-size: 0.9em;" 
-              onclick="playPronunciation('${word.presentExampleVoiceUrl}')">(${word.presentExample})</span>
+        <span class="clickable-english" style="cursor: pointer; font-size: 1em;" 
+              onclick="playPronunciation('${word.presentExampleVoiceUrl}')">${word.presentExample}</span>
     `;
 
     // Past Tense (Word + Example, both clickable for their respective audio)
@@ -494,8 +494,8 @@ function displayMode1() {
     pastCell.innerHTML = `
         <span class="clickable-english" style="cursor: pointer; font-weight: bold;" 
               onclick="playPronunciation('${word.pastVoiceUrl}')">${word.past}</span><br>
-        <span class="clickable-english" style="cursor: pointer; font-size: 0.9em;" 
-              onclick="playPronunciation('${word.pastExampleVoiceUrl}')">(${word.pastExample})</span>
+        <span class="clickable-english" style="cursor: pointer; font-size: 1.1em;" 
+              onclick="playPronunciation('${word.pastExampleVoiceUrl}')">${word.pastExample}</span>
     `;
 
     row.insertCell().textContent = `Used: ${usageData.usedCount}, Diff: ${usageData.difficulty}`;

@@ -1,4 +1,4 @@
-﻿1,～である、～いる ,be ,assets/audio/1a.mp3, I am happy.,assets/audio/1ex_present.mp3,was,assets/audio/1b.mp3, I was sad,assets/audio/1ex_past.mp3
+﻿1,～である、～いる ,be ,assets/audio/1a.mp3, I am happy.,assets/audio/1ex_present.mp3,was,assets/audio/1b.mp3, I was sad.,assets/audio/1ex_past.mp3
 1,～である、～いる ,be ,assets/audio/1a.mp3, I am happy.,assets/audio/1ex_present.mp3,were,assets/audio/1ba.mp3,They were angry.,assets/audio/1exa_past.mp3
 2,する ,do ,assets/audio/2a.mp3, I do my homework every day.,assets/audio/2ex_present.mp3,did ,assets/audio/2b.mp3, I did my homework yesterday.,assets/audio/2ex_past.mp3
 3,買う ,buy ,assets/audio/3a.mp3, I buy milk at the supermarket.,assets/audio/3ex_present.mp3,bought ,assets/audio/3b.mp3, I bought a pen today.,assets/audio/3ex_past.mp3
@@ -18,7 +18,7 @@
 17,眠る ,sleep ,assets/audio/17a.mp3, I sleep in my bed.,assets/audio/17ex_present.mp3,slept ,assets/audio/17b.mp3, I slept for ten hours.,assets/audio/17ex_past.mp3
 18,～を横にする ,lay ,assets/audio/18a.mp3, Nurses lay babies on beds at the hospital.,assets/audio/18ex_present.mp3,laid ,assets/audio/18b.mp3, I laid the baby on the bed.,assets/audio/18ex_past.mp3
 19,支払う ,pay ,assets/audio/19a.mp3, I always pay for my food at restaurants.,assets/audio/19ex_present.mp3,paid ,assets/audio/19b.mp3, I paid the bill yesterday.,assets/audio/19ex_past.mp3
-20,言う ,say ,assets/audio/20a.mp3," I say ""hello"" to my friends.",assets/audio/20ex_present.mp3,said ,assets/audio/20b.mp3," I said ""hello"" to my teacher this morning.",assets/audio/20ex_past.mp3
+20,言う ,say ,assets/audio/20a.mp3,I say "hello" to my friends.,assets/audio/20ex_present.mp3,said ,assets/audio/20b.mp3,I said "hello" to my teacher this morning.,assets/audio/20ex_past.mp3
 21,売る ,sell ,assets/audio/21a.mp3, I sometimes sell my old toys.,assets/audio/21ex_present.mp3,sold ,assets/audio/21b.mp3, He sold his toys to the store.,assets/audio/21ex_past.mp3
 22,話す、知らせる ,tell ,assets/audio/22a.mp3, Please tell me a story.,assets/audio/22ex_present.mp3,told ,assets/audio/22b.mp3, She told a funny joke.,assets/audio/22ex_past.mp3
 23,つかむ ,hold ,assets/audio/23a.mp3, I sometimes hold my mother’s hand.,assets/audio/23ex_present.mp3,held ,assets/audio/23b.mp3, I held my mother’s hand tightly.,assets/audio/23ex_past.mp3
