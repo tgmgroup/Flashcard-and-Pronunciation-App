@@ -494,7 +494,7 @@ function displayMode1() {
     pastCell.innerHTML = `
         <span class="clickable-english" style="cursor: pointer; font-weight: bold;" 
               onclick="playPronunciation('${word.pastVoiceUrl}')">${word.past}</span><br>
-        <span class="clickable-english" style="cursor: pointer; font-size: 1.1em;" 
+        <span class="clickable-english" style="cursor: pointer; font-size: 1em;" 
               onclick="playPronunciation('${word.pastExampleVoiceUrl}')">${word.pastExample}</span>
     `;
 
