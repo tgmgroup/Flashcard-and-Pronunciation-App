@@ -466,9 +466,9 @@ function displayMode1() {
   tableHead.innerHTML = `
     <th>#</th>
     <th>Japanese</th>
-    <th>Present (Click Word/Ex)</th>
-    <th>Past (Click Word/Ex)</th>
-    <th>Usage/Difficulty</th>
+    <th>Present (Word/Example)</th>
+    <th>Past (Word/Example)</th>
+    <th>Times/Mistakes</th>
   `;
 
   allWords.forEach((word) => {
@@ -498,7 +498,7 @@ function displayMode1() {
               onclick="playPronunciation('${word.pastExampleVoiceUrl}')">${word.pastExample}</span>
     `;
 
-    row.insertCell().textContent = `Used: ${usageData.usedCount}, Diff: ${usageData.difficulty}`;
+    row.insertCell().textContent = `Times: ${usageData.usedCount}, Mistakes: ${usageData.difficulty}`;
   });
 }
 
